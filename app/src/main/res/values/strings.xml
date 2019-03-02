@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">kotlin_test</string>
+
+    <string-array name="harmonica_stroi">
+        <item>Рихтеровская </item>
+        <item>Падди</item>
+        <item>Кантри</item>
+        <item>Нат. Минор</item>
+    </string-array>
+
+    <string-array name="harmonica_key">
+        <item>C </item>
+        <item>G</item>
+        <item>D</item>
+        <item>A</item>
+        <item>E</item>
+        <item>B</item>
+        <item>F#</item>
+        <item>C#</item>
+        <item>Ab</item>
+        <item>Eb</item>
+        <item>Bb</item>
+        <item>F</item>
+    </string-array>
+
 </resources>
