@@ -3,6 +3,9 @@ package com.example.kotlin_test
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.content.Context
+import android.util.TypedValue
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 
 import com.example.kotlin_test.Data.Harp
@@ -18,16 +21,16 @@ object Util {
     fun get_input_tabs(inputtabs: String, harp: Harp): MutableList<String> {
         var str = inputtabs.split(" ").toMutableList()
         for (index in str.indices)
-            if (str[index] == "3" && harp.stroi !== "Падди") {
+            if (str[index] == "+3" && harp.stroi !== "Падди") {
                 str[index] = "-2"
             }
         return str
     }
 
 
-    val TABS = arrayOf("1", "-1'", "-1", "1*", "2", "-2''", "-2'", "-2", "-3'''", "-3''", "-3'", "-3", "4", "-4'",
-            "-4", "4*", "5", "-5", "5*", "6", "-6'", "-6", "6*", "-7", "7", "-7*", "-8", "8'", "8", "-9", "9'",
-            "9", "-9*", "-10", "10''", "10'", "10", "-10*", "", "", "", "", "", "", "", "", "", "", "")
+    val TABS = arrayOf("+1", "-1'", "-1", "1*", "+2", "-2''", "-2'", "-2", "-3'''", "-3''", "-3'", "-3", "+4", "-4'",
+            "-4", "4*", "+5", "-5", "5*", "+6", "-6'", "-6", "6*", "-7", "+7", "-7*", "-8", "8'", "+8", "-9", "9'",
+            "+9", "-9*", "-10", "10''", "10'", "+10", "-10*", "", "", "", "", "", "", "", "", "", "", "")
     val NOTES = arrayOf("G", "Ab", "A", "Bb", "B", "C", "C#", "D", "Eb", "E", "F", "F#")
     val STROI = arrayOf("Rihter", "Paddy", "Country", "Нат. Минор")
 
@@ -47,9 +50,9 @@ object Util {
             if (usersTabs[indexI].contains("\n"))
                 rezultat += "\n"
             for (indexJ in ourHarp.allnote.indices) {
-                if (usersTabs[indexI] == ourHarp.allnote[indexJ].first) {
+                if (usersTabs[indexI] == ourHarp.allnote[indexJ].second) {
                     var newIndexJ = checkMargin(indexJ, temp)
-                    rezultat += " " + selectedHarp.allnote[newIndexJ].first
+                    rezultat += " " + selectedHarp.allnote[newIndexJ].second
                     break
                 }
 
@@ -81,6 +84,10 @@ object Util {
     }
 
 
+}
+fun View.addRipple() = with(TypedValue()) {
+    context.theme.resolveAttribute(android.R.attr.selectableItemBackground, this, true)
+    setBackgroundResource(resourceId)
 }
 
 
