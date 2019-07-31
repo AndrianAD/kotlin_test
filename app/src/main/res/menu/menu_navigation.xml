@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
     <item
-        android:id="@+id/destination_scale"
-        android:icon="@drawable/ic_home"
-        android:title="Home" />
-    <item
-        android:id="@+id/destination_setting"
+        android:id="@+id/scale_id"
         android:icon="@drawable/ic_camera"
-        android:title="Camera" />
+        android:title="Scale" />
+
+    <item
+        android:id="@+id/setting_id"
+        android:icon="@drawable/ic_home"
+        android:title="Setting" />
+
 </menu>

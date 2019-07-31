@@ -1,463 +1,475 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:grid="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/input_resultat"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/grid_layout"
-
-        />
-
-    <TextView
-        android:id="@+id/output_resultat"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="output_resultat"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/input_resultat" />
-
-    <FrameLayout
-        android:id="@+id/frame_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/output_resultat">
-
-    </FrameLayout>
-
-    <ImageView
-        android:id="@+id/setting_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="?android:selectableItemBackground"
-        android:clickable="true"
-        android:focusable="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_setting" />
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:src="@drawable/harmonica2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <GridLayout
-        android:id="@+id/grid_layout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:columnCount="10"
-        android:orientation="horizontal"
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp"
-
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        grid:alignmentMode="alignBounds"
-        grid:rowOrderPreserved="false"
-        grid:useDefaultMargins="true">
-
-        <TextView
-            android:id="@+id/b000"
-            style="@style/gridElement"
-            android:visibility="invisible"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b001"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b002"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b003"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b004"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b005"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b006"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b007"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b008"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b009"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b00"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b01"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b02"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b03"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b04"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b05"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b06"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b07"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b08"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b09"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b10"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b11"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b12"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b13"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b14"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b15"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b16"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b17"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b18"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b19"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b20"
-            style="@style/gridElement"
-            android:background="@color/colorPrimary"
-            android:text="1 "
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b21"
-            style="@style/gridElement"
-            android:background="@color/colorPrimary"
-            android:text="2 "
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b22"
-            style="@style/gridElement"
-            android:background="@color/colorPrimary"
-            android:text="3 "
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b23"
-            style="@style/gridElement"
-            android:background="@color/colorPrimary"
-            android:text="4 "
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            style="@style/gridElement"
-            android:background="@color/colorPrimary"
-            android:text="5 "
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            style="@style/gridElement"
-            android:background="@color/colorPrimary"
-            android:text="6 "
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            style="@style/gridElement"
-            android:background="@color/colorPrimary"
-            android:text="7 "
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            style="@style/gridElement"
-            android:background="@color/colorPrimary"
-            android:text="8 "
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            style="@style/gridElement"
-            android:background="@color/colorPrimary"
-            android:text="9 "
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            style="@style/gridElement"
-            android:background="@color/colorPrimary"
-            android:text="10 "
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b30"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b31"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b32"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b33"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b34"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b35"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b36"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b37"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b38"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b39"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-
-        <TextView
-            android:id="@+id/b40"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b41"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b42"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b43"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b44"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b45"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b46"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b47"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b48"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b49"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b50"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b51"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b52"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b53"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b54"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b55"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b56"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b57"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b58"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b59"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b60"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b61"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-
-        <TextView
-            android:id="@+id/b62"
-            style="@style/gridElement"
-            grid:layout_columnWeight="1" />
-    </GridLayout>
-
-
-    <android.support.design.widget.BottomNavigationView
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <fragment
+                android:id="@+id/nav_host_fragment"
+                android:name="androidx.navigation.fragment.NavHostFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:defaultNavHost="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/output_resultat"
+                app:navGraph="@navigation/mobile_navigation" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="56dp"
+                android:src="@drawable/harmonica2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <GridLayout
+                android:id="@+id/grid_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:columnCount="10"
+                android:orientation="horizontal"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                grid:alignmentMode="alignBounds"
+                grid:rowOrderPreserved="false"
+                grid:useDefaultMargins="true">
+
+                <TextView
+                    android:id="@+id/b000"
+                    style="@style/gridElement"
+                    android:visibility="invisible"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b001"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b002"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b003"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b004"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b005"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b006"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b007"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b008"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b009"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b00"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b01"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b02"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b03"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b04"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b05"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b06"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b07"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b08"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b09"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b10"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b11"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b12"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b13"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b14"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b15"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b16"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b17"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b18"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b19"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b20"
+                    style="@style/gridElement"
+                    android:background="@color/colorPrimary"
+                    android:text="1 "
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b21"
+                    style="@style/gridElement"
+                    android:background="@color/colorPrimary"
+                    android:text="2 "
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b22"
+                    style="@style/gridElement"
+                    android:background="@color/colorPrimary"
+                    android:text="3 "
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b23"
+                    style="@style/gridElement"
+                    android:background="@color/colorPrimary"
+                    android:text="4 "
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    style="@style/gridElement"
+                    android:background="@color/colorPrimary"
+                    android:text="5 "
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    style="@style/gridElement"
+                    android:background="@color/colorPrimary"
+                    android:text="6 "
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    style="@style/gridElement"
+                    android:background="@color/colorPrimary"
+                    android:text="7 "
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    style="@style/gridElement"
+                    android:background="@color/colorPrimary"
+                    android:text="8 "
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    style="@style/gridElement"
+                    android:background="@color/colorPrimary"
+                    android:text="9 "
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    style="@style/gridElement"
+                    android:background="@color/colorPrimary"
+                    android:text="10 "
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b30"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b31"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b32"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b33"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b34"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b35"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b36"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b37"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b38"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b39"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+
+                <TextView
+                    android:id="@+id/b40"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b41"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b42"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b43"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b44"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b45"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b46"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b47"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b48"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b49"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b50"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b51"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b52"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b53"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b54"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b55"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b56"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b57"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b58"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b59"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b60"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b61"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+
+                <TextView
+                    android:id="@+id/b62"
+                    style="@style/gridElement"
+                    grid:layout_columnWeight="1" />
+            </GridLayout>
+
+            <ImageView
+                android:id="@+id/setting_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_setting" />
+
+            <TextView
+                android:id="@+id/input_resultat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/grid_layout"
+
+                />
+
+            <TextView
+                android:id="@+id/output_resultat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="output_resultat"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_resultat" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -466,4 +478,4 @@
         app:menu="@menu/menu_navigation" />
 
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

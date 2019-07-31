@@ -1,6 +1,6 @@
 package com.example.kotlin_test.Data
 
-import android.arch.lifecycle.*
+import androidx.lifecycle.*
 import android.util.Log
 import android.widget.TextView
 import com.example.kotlin_test.Util
@@ -113,11 +113,11 @@ class Harp(var stroi: String = "Rihter", var position: Int = 5) : ViewModel(), L
     }
 
 
-    fun allNotesToString(list: ArrayList<Pair<String, String>>, tabsOrNote: Boolean): String {
+    fun splitAllNotesToList(list: ArrayList<Pair<String, String>>, tabsOrNote: Boolean): MutableList<String> {
         var temp = ""
         for (element in list)
             temp+= if(tabsOrNote) element.first+" " else element.second+" "
-        return temp
+        return temp.split(" ").toMutableList()
     }
 
     override fun onCleared() {

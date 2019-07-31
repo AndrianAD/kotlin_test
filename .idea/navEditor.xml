@@ -8,7 +8,7 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
-                  <entry key="destination_scale">
+                  <entry key="scale_id">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
@@ -20,7 +20,7 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="destination_setting">
+                  <entry key="setting_id">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">

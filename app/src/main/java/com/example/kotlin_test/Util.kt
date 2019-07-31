@@ -1,12 +1,9 @@
 package com.example.kotlin_test
 
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
-import android.content.Context
+
 import android.util.TypedValue
 import android.view.View
-import android.widget.TextView
-import android.widget.Toast
+
 
 import com.example.kotlin_test.Data.Harp
 
@@ -85,7 +82,7 @@ object Util {
 
 
 }
-fun View.addRipple() = with(TypedValue()) {
+fun View.makeSelectable() = with(TypedValue()) {
     context.theme.resolveAttribute(android.R.attr.selectableItemBackground, this, true)
     setBackgroundResource(resourceId)
 }
