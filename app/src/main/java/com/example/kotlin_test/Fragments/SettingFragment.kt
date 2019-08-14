@@ -52,9 +52,6 @@ class SettingFragment : androidx.fragment.app.Fragment(){
             override fun onStopTrackingTouch(seekBar: SeekBar) {
             }
         })
-
-
-
         return view
     }
 

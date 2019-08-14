@@ -86,7 +86,7 @@ class Harp(var stroi: String = "Rihter", var position: Int = 5) : ViewModel(), L
 
 
     private fun makeCountryNotes(tempList: ArrayList<Pair<String, String>>): ArrayList<Pair<String, String>> {
-        tempList[17] = Pair(tempList[17].first, "-5'");
+        tempList[17] = Pair(tempList[17].first, "-5'")
         tempList[18] = Pair(tempList[18].first, "-5")
         //tempList.set(18,Pair(tempList[18].first, "-5"))
         return tempList
@@ -94,7 +94,7 @@ class Harp(var stroi: String = "Rihter", var position: Int = 5) : ViewModel(), L
 
 
     private fun makePaddyNotes(tempList: ArrayList<Pair<String, String>>): ArrayList<Pair<String, String>> {
-        tempList[8] = Pair(tempList[8].first, "2*");
+        tempList[8] = Pair(tempList[8].first, "2*")
         tempList[9] = Pair(tempList[9].first, "3")
         return tempList
     }

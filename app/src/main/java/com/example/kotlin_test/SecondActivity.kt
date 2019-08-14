@@ -1,9 +1,9 @@
 package com.example.kotlin_test
 
-
 import androidx.lifecycle.MutableLiveData
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.widget.*
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
@@ -63,55 +63,54 @@ class SecondActivity : AppCompatActivity() {
 
 
         harp1.observe(this, androidx.lifecycle.Observer {
-            show_harmonica(positionsGrid, it!!, it, harp2.value!!, tabsOrNotes)
+            showHarmonica(positionsGrid, it!!, it, harp2.value!!, tabsOrNotes)
         })
         harp2.observe(this, androidx.lifecycle.Observer {
-            show_harmonica(positionsGrid, it!!, harp1.value!!, it, tabsOrNotes)
+            showHarmonica(positionsGrid, it!!, harp1.value!!, it, tabsOrNotes)
         })
 
         setting_id.setOnClickListener { if (tabsOrNotes)tabsOrNotes=false else tabsOrNotes=true
-            show_harmonica(positionsGrid, harp1.value!! , harp1.value!!,harp2.value!!, tabsOrNotes)}
+            showHarmonica(positionsGrid, harp1.value!! , harp1.value!!,harp2.value!!, tabsOrNotes)}
 
   }
-
-//--------------------------------------------------------------------------
-
-//    override fun onSaveInstanceState(outState: Bundle?) {
-//        outState?.run {
-//            putString("output_resultat", result.value)
-//            putString("input_resultat", input_resultat.text.toString())
-//        }
-//        super.onSaveInstanceState(outState)
-//    }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)
         output_resultat.text = savedInstanceState?.getString("output_resultat")
         input_resultat.text = savedInstanceState?.getString("input_resultat")
         result.value = savedInstanceState?.getString("output_resultat")!!
-        inPutText = savedInstanceState?.getString("input_resultat")!!
+        inPutText = savedInstanceState.getString("input_resultat")!!
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
+        super.onSaveInstanceState(outState!!)
+                outState.run {
+            putString("output_resultat", result.value)
+            putString("input_resultat", input_resultat.text.toString())
+        }
+
     }
 
 
-    fun show_harmonica(positionsGrid: IntArray, harp: Harp, harp1: Harp, harp2: Harp, tabsOrNotes: Boolean) {
+    fun showHarmonica(positionsGrid: IntArray, harp: Harp, harp1: Harp, harp2: Harp, tabsOrNotes: Boolean) {
 
         var array_of_Notes =  harp.splitAllNotesToList(harp.allnote, tabsOrNotes)
         //  val array_of_allTabs =all_Tabs.split(" ").toMutableList()
         var hole = findViewById(R.id.b12) as TextView
-        hole.setText("+3")
+//        hole.setText("+3")
 
         var listOfActiveGrid: MutableList<TextView> = mutableListOf()
 
         for (i in positionsGrid.indices) {
-            hole = findViewById<TextView>(positionsGrid[i])
-            hole.setText(array_of_Notes[i])
+            hole = findViewById(positionsGrid[i])
+            hole.text = array_of_Notes[i]
             hole.isClickable = true
             hole.makeSelectable()
             listOfActiveGrid.add(hole)
         }
         var index = 0
         while (index < listOfActiveGrid.size) {
-            var element = listOfActiveGrid[index]
+            val element = listOfActiveGrid[index]
             element.setOnClickListener {
                 inPutText += " " + element.text.toString()
                 input_resultat.text = inPutText

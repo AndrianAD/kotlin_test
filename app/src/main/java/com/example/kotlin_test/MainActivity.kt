@@ -1,17 +1,13 @@
 package com.example.kotlin_test
-
-import androidx.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProviders
 import com.example.kotlin_test.Data.Harp
-import com.example.kotlin_test.Util.check_difference_position
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -25,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     private var message: String = ""
     private val TAG = javaClass.simpleName
     private var ourHarp = Harp()
-    private var selectedHarp = Harp(position =0)
+    private var selectedHarp = Harp(position = 0)
 
     private val viewModel: Harp by lazy {
         ViewModelProviders.of(this).get(Harp::class.java)
@@ -35,58 +31,30 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         Log.i(TAG, "Main Activity ON_CREATE")
-        var spinerAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, Util.STROI)
 
         // подписка на Lifecycle
         lifecycle.addObserver(Harp())
 
 
-
-
-
-
-
-
-
-
-
         button.setOnClickListener {
-          //  textView.setText(calculate(ourHarp,selectedHarp))
-            startActivity(Intent(this,SecondActivity::class.java))
+            //  textView.setText(calculate(ourHarp,selectedHarp))
+            startActivity(Intent(this, SecondActivity::class.java))
 
         }
-
-
-
-        left_spinner.adapter = spinerAdapter
-        left_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                ourHarp.stroi = Util.STROI[position]
-            }
-        }
-
-
-        right_spinner.adapter = spinerAdapter
-        right_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                selectedHarp.stroi = Util.STROI[position]
-            }
-        }
-
 
     }
 
 
-
-
-
-
-
 }
+
+
+
+
+
+
+
+
+
 
 
 
