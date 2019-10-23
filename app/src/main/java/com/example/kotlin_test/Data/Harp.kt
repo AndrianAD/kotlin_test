@@ -15,7 +15,7 @@ class Harp(var stroi: String = "Rihter", var position: Int = 5) : ViewModel(), L
 
     init {
         allnote = makeAllNotes(stroi, position)
-        key_of_harp = allnote.get(0).first
+        key_of_harp = allnote[0].first
     }
 
     //LIFECYCLE

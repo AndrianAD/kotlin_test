@@ -20,7 +20,7 @@ class SecondActivity : AppCompatActivity() {
         var harp1: MutableLiveData<Harp> = MutableLiveData()
         var harp2: MutableLiveData<Harp> = MutableLiveData()
         var inPutText: String = ""
-        var tabsOrNotes: Boolean= true
+        var tabsOrNotes: Boolean = true
     }
 
     init {
@@ -59,7 +59,7 @@ class SecondActivity : AppCompatActivity() {
         setContentView(R.layout.activity_second)
 
         var navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupWithNavController(bottom_nav,navController)
+        NavigationUI.setupWithNavController(bottom_nav, navController)
 
 
         harp1.observe(this, androidx.lifecycle.Observer {
@@ -69,24 +69,26 @@ class SecondActivity : AppCompatActivity() {
             showHarmonica(positionsGrid, it!!, harp1.value!!, it, tabsOrNotes)
         })
 
-        setting_id.setOnClickListener { if (tabsOrNotes)tabsOrNotes=false else tabsOrNotes=true
-            showHarmonica(positionsGrid, harp1.value!! , harp1.value!!,harp2.value!!, tabsOrNotes)}
+        setting_id.setOnClickListener {
+            if (tabsOrNotes) tabsOrNotes = false else tabsOrNotes = true
+            showHarmonica(positionsGrid, harp1.value!!, harp1.value!!, harp2.value!!, tabsOrNotes)
+        }
 
-  }
+    }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)
-        output_resultat.text = savedInstanceState?.getString("output_resultat")
-        input_resultat.text = savedInstanceState?.getString("input_resultat")
-        result.value = savedInstanceState?.getString("output_resultat")!!
-        inPutText = savedInstanceState.getString("input_resultat")!!
+//        output_resultat.text = savedInstanceState?.getString("output_resultat") ?: " "
+//        input_resultat.text = savedInstanceState?.getString("input_resultat") ?: " "
+//        result.value = savedInstanceState?.getString("output_resultat")
+//        inPutText = savedInstanceState?.getString("input_resultat")!!
     }
 
     override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
         super.onSaveInstanceState(outState!!)
                 outState.run {
-            putString("output_resultat", result.value)
-            putString("input_resultat", input_resultat.text.toString())
+//            putString("output_resultat", result.value)
+//            putString("input_resultat", input_resultat.text.toString())
         }
 
     }
@@ -94,7 +96,7 @@ class SecondActivity : AppCompatActivity() {
 
     fun showHarmonica(positionsGrid: IntArray, harp: Harp, harp1: Harp, harp2: Harp, tabsOrNotes: Boolean) {
 
-        var array_of_Notes =  harp.splitAllNotesToList(harp.allnote, tabsOrNotes)
+        var array_of_Notes = harp.splitAllNotesToList(harp.allnote, tabsOrNotes)
         //  val array_of_allTabs =all_Tabs.split(" ").toMutableList()
         var hole = findViewById(R.id.b12) as TextView
 //        hole.setText("+3")
@@ -125,8 +127,8 @@ class SecondActivity : AppCompatActivity() {
         }
     }
 
-    private fun clearView(){
-        var hole:TextView
+    private fun clearView() {
+        var hole: TextView
         for (i in positionsGrid.indices) {
             hole = findViewById<TextView>(positionsGrid[i])
             hole.setText("")
