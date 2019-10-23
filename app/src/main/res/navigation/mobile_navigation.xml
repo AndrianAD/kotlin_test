@@ -9,6 +9,7 @@
         android:id="@+id/setting_id"
         android:name="com.example.kotlin_test.Fragments.SettingFragment"
         android:label="Setting"
+
         tools:layout="@layout/fragment_setting" />
 
     <fragment

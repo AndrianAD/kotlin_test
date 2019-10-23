@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.SettingFragment">
 
 
@@ -11,122 +11,100 @@
         android:id="@+id/textKey"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:text="Key: "
         android:textStyle="bold"
-        android:layout_margin="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintHorizontal_weight="3"
-       />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <SeekBar
         android:id="@+id/seekBarKey"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/textKey"
-        android:max="11"
         android:layout_margin="8dp"
+        android:max="11"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintHorizontal_weight="7"
-       />
-
+        app:layout_constraintStart_toEndOf="@id/textKey"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
         android:id="@+id/textStroi"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:text="Stroi: "
         android:textStyle="bold"
-        android:layout_margin="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textKey"
         app:layout_constraintHorizontal_weight="3"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textKey" />
 
     <SeekBar
         android:id="@+id/seekBarStroi"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/textStroi"
-        android:max="4"
         android:layout_margin="8dp"
-        app:layout_constraintTop_toBottomOf="@id/textKey"
+        android:max="4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="7"
-        />
+        app:layout_constraintStart_toEndOf="@id/textStroi"
+        app:layout_constraintTop_toBottomOf="@id/textKey" />
 
     <ImageView
-      android:id="@+id/arrow_image"
+        android:id="@+id/arrow_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_arrow_down"
-        app:layout_constraintTop_toBottomOf="@id/seekBarStroi"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/seekBarStroi" />
 
 
     <TextView
         android:id="@+id/textKey2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:text="Key: "
         android:textStyle="bold"
-        android:layout_margin="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/arrow_image"
         app:layout_constraintHorizontal_weight="3"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/arrow_image" />
 
     <SeekBar
         android:id="@+id/seekBarKey2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/textKey2"
-        android:max="11"
         android:layout_margin="8dp"
+        android:max="11"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/arrow_image"
         app:layout_constraintHorizontal_weight="7"
-        />
+        app:layout_constraintStart_toEndOf="@id/textKey2"
+        app:layout_constraintTop_toBottomOf="@id/arrow_image" />
 
     <TextView
         android:id="@+id/textStroi2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:text="Stroi: "
         android:textStyle="bold"
-        android:layout_margin="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textKey2"
         app:layout_constraintHorizontal_weight="3"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textKey2" />
 
     <SeekBar
         android:id="@+id/seekBarStroi2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/textStroi"
-        android:max="4"
         android:layout_margin="8dp"
-        app:layout_constraintTop_toBottomOf="@id/textKey2"
+        android:max="4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="7"
-        />
-
-
-
-
-
-
-
-
-
-
-
-
+        app:layout_constraintStart_toEndOf="@id/textStroi"
+        app:layout_constraintTop_toBottomOf="@id/textKey2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
