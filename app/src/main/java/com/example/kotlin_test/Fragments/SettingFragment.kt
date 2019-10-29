@@ -48,7 +48,6 @@ class SettingFragment : androidx.fragment.app.Fragment() {
                 harp2.value = Harp(position = progress)
                 textKey2.text = harp2.value!!.keyOfHarp
                 viewModel.result.value = Util.getResult(harp1.value!!, harp2.value!!, viewModel.inPutText.value.toString())
-
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {

@@ -108,9 +108,7 @@ class SecondActivity : AppCompatActivity() {
 
         var arrayOfNotes = harp.splitAllNotesToList(harp.allnote, tabsOrNotes)
         //  val array_of_allTabs =all_Tabs.split(" ").toMutableList()
-        var hole = findViewById<TextView>(R.id.b12)
-        hole.text = "G"
-
+        var hole: TextView
         var listOfActiveGrid: MutableList<TextView> = mutableListOf()
 
         for (i in positionsGrid.indices) {
@@ -123,8 +121,10 @@ class SecondActivity : AppCompatActivity() {
 
         for (element in listOfActiveGrid) {
             element.setOnClickListener {
-                viewModel.inPutText.value += " " + element.text.toString()
-                viewModel.result.value = Util.getResult(harp1, harp2, viewModel.inPutText.value!!)
+                if (tabsOrNotes.not()) {
+                    viewModel.inPutText.value += " " + element.text.toString()
+                    viewModel.result.value = Util.getResult(harp1, harp2, viewModel.inPutText.value!!)
+                }
             }
         }
     }
