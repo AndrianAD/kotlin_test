@@ -1,14 +1,14 @@
 package com.example.kotlin_test
 
-import androidx.lifecycle.MutableLiveData
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.widget.*
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.example.kotlin_test.Data.Harp
 import kotlinx.android.synthetic.main.activity_second.*
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 import java.util.*
 
 
@@ -16,11 +16,10 @@ class SecondActivity : AppCompatActivity() {
 
 
     companion object {
-        var result: MutableLiveData<String> = MutableLiveData()
         var harp1: MutableLiveData<Harp> = MutableLiveData()
         var harp2: MutableLiveData<Harp> = MutableLiveData()
-        var inPutText: String = ""
         var tabsOrNotes: Boolean = true
+        lateinit var viewModel: ViewModel
     }
 
     init {
@@ -47,6 +46,8 @@ class SecondActivity : AppCompatActivity() {
             put("F#", 11)
         }
     }
+
+
     private val majorScale = intArrayOf(2, 2, 1, 2, 2, 2, 1)
     private val minorScale = intArrayOf(2, 1, 2, 2, 1, 2, 2)
     private val bluesScale = intArrayOf(3, 2, 1, 1, 3, 2)
@@ -58,90 +59,87 @@ class SecondActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
 
-        var navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        viewModel = getViewModel()
+
+
+        var navController = Navigation.findNavController(this, R.id.nav_host_fragment)
         NavigationUI.setupWithNavController(bottom_nav, navController)
 
 
         harp1.observe(this, androidx.lifecycle.Observer {
             showHarmonica(positionsGrid, it!!, it, harp2.value!!, tabsOrNotes)
+            set3Hole(tabsOrNotes)
         })
         harp2.observe(this, androidx.lifecycle.Observer {
             showHarmonica(positionsGrid, it!!, harp1.value!!, it, tabsOrNotes)
+            set3Hole(tabsOrNotes)
         })
 
+
+        viewModel.result.observe(this, androidx.lifecycle.Observer {
+            output_resultat.text = it
+
+        })
+
+        viewModel.inPutText.observe(this, androidx.lifecycle.Observer {
+            input_resultat.text = it
+        })
+
+
         setting_id.setOnClickListener {
-            if (tabsOrNotes) tabsOrNotes = false else tabsOrNotes = true
+            tabsOrNotes = !tabsOrNotes
             showHarmonica(positionsGrid, harp1.value!!, harp1.value!!, harp2.value!!, tabsOrNotes)
+            set3Hole(tabsOrNotes)
         }
 
     }
 
-    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
-        super.onRestoreInstanceState(savedInstanceState)
-//        output_resultat.text = savedInstanceState?.getString("output_resultat") ?: " "
-//        input_resultat.text = savedInstanceState?.getString("input_resultat") ?: " "
-//        result.value = savedInstanceState?.getString("output_resultat")
-//        inPutText = savedInstanceState?.getString("input_resultat")!!
-    }
+    private fun set3Hole(tabsOrNotes: Boolean) {
+        var hole = findViewById<TextView>(R.id.b12)
+        if (tabsOrNotes) {
+            hole.text = harp1.value!!.allnote[7].first
 
-    override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
-        super.onSaveInstanceState(outState!!)
-                outState.run {
-//            putString("output_resultat", result.value)
-//            putString("input_resultat", input_resultat.text.toString())
+        } else {
+            hole.text = "+3"
         }
-
     }
 
+    private fun showHarmonica(positionsGrid: IntArray, harp: Harp, harp1: Harp, harp2: Harp, tabsOrNotes: Boolean) {
 
-    fun showHarmonica(positionsGrid: IntArray, harp: Harp, harp1: Harp, harp2: Harp, tabsOrNotes: Boolean) {
-
-        var array_of_Notes = harp.splitAllNotesToList(harp.allnote, tabsOrNotes)
+        var arrayOfNotes = harp.splitAllNotesToList(harp.allnote, tabsOrNotes)
         //  val array_of_allTabs =all_Tabs.split(" ").toMutableList()
-        var hole = findViewById(R.id.b12) as TextView
-//        hole.setText("+3")
+        var hole = findViewById<TextView>(R.id.b12)
+        hole.text = "G"
 
         var listOfActiveGrid: MutableList<TextView> = mutableListOf()
 
         for (i in positionsGrid.indices) {
             hole = findViewById(positionsGrid[i])
-            hole.text = array_of_Notes[i]
+            hole.text = arrayOfNotes[i]
             hole.isClickable = true
             hole.makeSelectable()
             listOfActiveGrid.add(hole)
         }
-        var index = 0
-        while (index < listOfActiveGrid.size) {
-            val element = listOfActiveGrid[index]
+
+        for (element in listOfActiveGrid) {
             element.setOnClickListener {
-                inPutText += " " + element.text.toString()
-                input_resultat.text = inPutText
-
-                result.value = Util.getResult(harp1, harp2, inPutText)
-                result.observe(this, androidx.lifecycle.Observer {
-                    output_resultat.text = it
-
-                })
+                viewModel.inPutText.value += " " + element.text.toString()
+                viewModel.result.value = Util.getResult(harp1, harp2, viewModel.inPutText.value!!)
             }
-            index++
         }
     }
 
     private fun clearView() {
         var hole: TextView
         for (i in positionsGrid.indices) {
-            hole = findViewById<TextView>(positionsGrid[i])
-            hole.setText("")
+            hole = findViewById(positionsGrid[i])
+            hole.text = ""
         }
     }
 
 
-//    fun makeScale(isChecked: Boolean, scale_array: IntArray, resultView: TextView?): String {
-//
-//
-//    }
-
-
+    override fun onBackPressed() {
+    }
 }
 
 

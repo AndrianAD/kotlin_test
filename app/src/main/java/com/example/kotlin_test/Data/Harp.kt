@@ -1,21 +1,24 @@
 package com.example.kotlin_test.Data
 
-import androidx.lifecycle.*
 import android.util.Log
 import android.widget.TextView
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.ViewModel
 import com.example.kotlin_test.Util
 import java.util.*
 
 class Harp(var stroi: String = "Rihter", var position: Int = 5) : ViewModel(), LifecycleObserver {
 
-    var key_of_harp: String = ""
+    var keyOfHarp: String = ""
     var allnote = arrayListOf<Pair<String, String>>()
     private val TAG = javaClass.simpleName
     var tempRandom: String? = null
 
     init {
         allnote = makeAllNotes(stroi, position)
-        key_of_harp = allnote[0].first
+        keyOfHarp = allnote[0].first
     }
 
     //LIFECYCLE
@@ -44,21 +47,21 @@ class Harp(var stroi: String = "Rihter", var position: Int = 5) : ViewModel(), L
 //----------------------------------------------------
 
     fun randomString(): String {
-        if (tempRandom == null) {
+        return if (tempRandom == null) {
             val random: String = Random().nextInt(9).toString()
             val random2: String = Random().nextInt(9).toString()
             val random3: String = Random().nextInt(9).toString()
             val random4: String = Random().nextInt(9).toString()
             tempRandom = random + random2 + random3 + random4
-            return tempRandom as String
+            tempRandom as String
 
-        } else return tempRandom as String
+        } else tempRandom as String
     }
 
 
     fun makeharp(stroi: String, position: Int, textView: TextView) {
         allnote = makeAllNotes(stroi, position)
-        key_of_harp = allnote.get(0).first
+        keyOfHarp = allnote.get(0).first
         this.stroi = stroi
         this.position = position
         print(textView)
@@ -73,12 +76,12 @@ class Harp(var stroi: String = "Rihter", var position: Int = 5) : ViewModel(), L
     }
 
     private fun makeAllNotes(stroi: String, position: Int): ArrayList<Pair<String, String>> {
-        var tempList = makeRihterNotes(position)
-        when (stroi) {
-            "Rihter" -> return tempList
-            "Paddy" -> return makePaddyNotes(tempList)
-            "Country" -> return makeCountryNotes(tempList)
-            "Нат. Минор" -> return makeRihterNotes(position)
+        val tempList = makeRihterNotes(position)
+        return when (stroi) {
+            "Rihter" -> tempList
+            "Paddy" -> makePaddyNotes(tempList)
+            "Country" -> makeCountryNotes(tempList)
+            "Нат. Минор" -> makeRihterNotes(position)
 
             else -> throw IllegalArgumentException("Wrong stroi $stroi")
         }
@@ -116,7 +119,7 @@ class Harp(var stroi: String = "Rihter", var position: Int = 5) : ViewModel(), L
     fun splitAllNotesToList(list: ArrayList<Pair<String, String>>, tabsOrNote: Boolean): MutableList<String> {
         var temp = ""
         for (element in list)
-            temp+= if(tabsOrNote) element.first+" " else element.second+" "
+            temp += if (tabsOrNote) element.first + " " else element.second + " "
         return temp.split(" ").toMutableList()
     }
 

@@ -12,14 +12,14 @@ object GridPosition {
     }
 
     fun getPaddy(): IntArray {
-        var positions_id_Paddy = getRihter()
+        val positions_id_Paddy = getRihter()
         positions_id_Paddy[8] = R.id.b01
         positions_id_Paddy[9] = R.id.b12
         return positions_id_Paddy
     }
 
     fun getNaturalMinor(): IntArray {
-        var positions_id_Natural_Minor = getRihter()
+        val positions_id_Natural_Minor = getRihter()
         positions_id_Natural_Minor[3] = R.id.b11
         positions_id_Natural_Minor[4] = R.id.b61
         positions_id_Natural_Minor[8] = R.id.b52
@@ -36,7 +36,7 @@ object GridPosition {
     }
 
     fun getCountry(): IntArray {
-        var positions_id_Country = getRihter()
+        val positions_id_Country = getRihter()
         positions_id_Country[17] = R.id.b44
         positions_id_Country[18] = R.id.b34
         return  positions_id_Country

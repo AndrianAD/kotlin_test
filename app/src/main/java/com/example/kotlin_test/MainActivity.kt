@@ -9,10 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.kotlin_test.Data.Harp
 
 
-//Функция-расширения (Extension function)
-fun Context.toast(message: String, duration: Int = Toast.LENGTH_LONG) {
-    Toast.makeText(this, message, duration).show()
-}
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -26,8 +23,6 @@ class MainActivity : AppCompatActivity() {
 
         // подписка на Lifecycle
         lifecycle.addObserver(Harp())
-
-
 
         startActivity(Intent(this, SecondActivity::class.java))
 

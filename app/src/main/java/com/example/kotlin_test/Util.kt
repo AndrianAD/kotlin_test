@@ -1,8 +1,10 @@
 package com.example.kotlin_test
 
 
+import android.content.Context
 import android.util.TypedValue
 import android.view.View
+import android.widget.Toast
 
 
 import com.example.kotlin_test.Data.Harp
@@ -10,13 +12,16 @@ import com.example.kotlin_test.Data.Harp
 
 object Util {
 
+    fun Context.toast(message: String, duration: Int = Toast.LENGTH_LONG) {
+        Toast.makeText(this, message, duration).show()
+    }
 
     fun getResult(ourHarp: Harp, selectedHarp: Harp, tabs: String): String {
         return calculate(ourHarp, selectedHarp, tabs)
     }
 
-    fun get_input_tabs(inputtabs: String, harp: Harp): MutableList<String> {
-        var str = inputtabs.split(" ").toMutableList()
+    private fun getInputTabs(inputtabs: String, harp: Harp): MutableList<String> {
+        val str = inputtabs.split(" ").toMutableList()
         for (index in str.indices)
             if (str[index] == "+3" && harp.stroi !== "Падди") {
                 str[index] = "-2"
@@ -31,29 +36,27 @@ object Util {
     val NOTES = arrayOf("G", "Ab", "A", "Bb", "B", "C", "C#", "D", "Eb", "E", "F", "F#")
     val STROI = arrayOf("Rihter", "Paddy", "Country", "Нат. Минор")
 
-    fun calculate(ourHarp: Harp, selectedHarp: Harp, string: String): String {
+    private fun calculate(ourHarp: Harp, selectedHarp: Harp, string: String): String {
         if (ourHarp.allnote.isEmpty() || selectedHarp.allnote.isEmpty()) {
             return ""
         }
-        var usersTabs = Util.get_input_tabs(string, ourHarp)
+        var usersTabs = Util.getInputTabs(string, ourHarp)
         return changetabs(ourHarp, selectedHarp, usersTabs)
     }
 
 
-    fun changetabs(ourHarp: Harp, selectedHarp: Harp, usersTabs: MutableList<String>): String {
+    private fun changetabs(ourHarp: Harp, selectedHarp: Harp, usersTabs: MutableList<String>): String {
         var rezultat = ""
-        val temp = check_difference_position(ourHarp.position, selectedHarp.position)
+        val temp = checkDifferencePosition(ourHarp.position, selectedHarp.position)
         for (indexI in usersTabs.indices) {
             if (usersTabs[indexI].contains("\n"))
                 rezultat += "\n"
             for (indexJ in ourHarp.allnote.indices) {
                 if (usersTabs[indexI] == ourHarp.allnote[indexJ].second) {
-                    var newIndexJ = checkMargin(indexJ, temp)
+                    val newIndexJ = checkMargin(indexJ, temp)
                     rezultat += " " + selectedHarp.allnote[newIndexJ].second
                     break
                 }
-
-
             }
         }
         return rezultat
@@ -62,19 +65,18 @@ object Util {
     private fun checkMargin(indexJ: Int, temp: Int): Int {
         var sum = indexJ + temp
         if (sum < 0) {
-            sum = sum + 12
+            sum += 12
         }
         if (sum > 37) {
-            sum = sum - 12
+            sum -= 12
         }
         return sum
     }
 
 
-    fun check_difference_position(n: Int, z: Int): Int {
-        var temps = z - n
-        //val nums = intArrayOf(-1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11)
-        for (i in -1..-11) {
+    private fun checkDifferencePosition(n: Int, z: Int): Int {
+        val temps = z - n
+        for (i in -1 downTo -11) {
             if (temps == i) return 12 - -i
         }
         return temps
@@ -82,6 +84,7 @@ object Util {
 
 
 }
+
 fun View.makeSelectable() = with(TypedValue()) {
     context.theme.resolveAttribute(android.R.attr.selectableItemBackground, this, true)
     setBackgroundResource(resourceId)
