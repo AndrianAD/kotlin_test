@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.SeekBar
 import com.example.kotlin_test.Data.Harp
 import com.example.kotlin_test.R
-import com.example.kotlin_test.SecondActivity
 import com.example.kotlin_test.SecondActivity.Companion.harp1
 import com.example.kotlin_test.SecondActivity.Companion.harp2
 import com.example.kotlin_test.Util
@@ -23,8 +22,9 @@ class SettingFragment : androidx.fragment.app.Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         var view: View = inflater.inflate(R.layout.fragment_setting, container, false)
-        viewModel = getSharedViewModel()
 
+
+        viewModel = getSharedViewModel()
         view.seekBarKey.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, b: Boolean) {

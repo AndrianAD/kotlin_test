@@ -47,14 +47,6 @@ class SecondActivity : AppCompatActivity() {
         }
     }
 
-
-    private val majorScale = intArrayOf(2, 2, 1, 2, 2, 2, 1)
-    private val minorScale = intArrayOf(2, 1, 2, 2, 1, 2, 2)
-    private val bluesScale = intArrayOf(3, 2, 1, 1, 3, 2)
-    private val pentamajorScale = intArrayOf(2, 2, 3, 2, 3)
-    private val pentaminorScale = intArrayOf(3, 2, 2, 3, 2)
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
@@ -77,12 +69,12 @@ class SecondActivity : AppCompatActivity() {
 
 
         viewModel.result.observe(this, androidx.lifecycle.Observer {
-            output_resultat.text = it
+            outputResult.text = it
 
         })
 
         viewModel.inPutText.observe(this, androidx.lifecycle.Observer {
-            input_resultat.text = it
+            inputResult.text = it
         })
 
 
@@ -90,6 +82,11 @@ class SecondActivity : AppCompatActivity() {
             tabsOrNotes = !tabsOrNotes
             showHarmonica(positionsGrid, harp1.value!!, harp1.value!!, harp2.value!!, tabsOrNotes)
             set3Hole(tabsOrNotes)
+        }
+
+        backspace.setOnClickListener {
+            viewModel.result.value = outputResult.text.dropLastWhile { it != ' ' }.dropLast(1).toString()
+            viewModel.inPutText.value = inputResult.text.dropLastWhile { it != ' ' }.dropLast(1).toString()
         }
 
     }
@@ -117,6 +114,15 @@ class SecondActivity : AppCompatActivity() {
             hole.isClickable = true
             hole.makeSelectable()
             listOfActiveGrid.add(hole)
+        }
+
+
+        var hole3 = findViewById<TextView>(R.id.b12)
+        hole3.setOnClickListener {
+            if (tabsOrNotes.not()) {
+                viewModel.inPutText.value += " " + hole3.text.toString()
+                viewModel.result.value = Util.getResult(harp1, harp2, viewModel.inPutText.value!!)
+            }
         }
 
         for (element in listOfActiveGrid) {

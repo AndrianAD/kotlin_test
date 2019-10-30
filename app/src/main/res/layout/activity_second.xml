@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:grid="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/Background2">
 
     <ScrollView
         android:id="@+id/scroll"
@@ -23,7 +24,7 @@
                 app:defaultNavHost="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/output_resultat"
+                app:layout_constraintTop_toBottomOf="@id/outputResult"
                 app:navGraph="@navigation/mobile_navigation" />
 
             <ImageView
@@ -448,22 +449,43 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_setting" />
 
+            <ImageView
+                android:id="@+id/backspace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginEnd="10dp"
+                android:padding="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/inputResult"
+                app:layout_constraintTop_toBottomOf="@+id/grid_layout"
+                app:srcCompat="@drawable/ic_backspace_black_24dp" />
+
             <TextView
-                android:id="@+id/input_resultat"
+                android:id="@+id/inputResult"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="40dp"
+                android:textColor="@android:color/black"
+                android:textSize="30sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/grid_layout" />
 
             <TextView
-                android:id="@+id/output_resultat"
+                android:id="@+id/outputResult"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="output_resultat"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="40dp"
+                android:textColor="@android:color/black"
+                android:textSize="30sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/input_resultat" />
+                app:layout_constraintTop_toBottomOf="@id/inputResult" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
