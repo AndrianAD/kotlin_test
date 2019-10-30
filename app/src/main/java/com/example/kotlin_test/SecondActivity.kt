@@ -1,7 +1,5 @@
 package com.example.kotlin_test
 
-import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -23,6 +21,7 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
         var tabsOrNotes: Boolean = true
         lateinit var viewModel: ViewModel
         lateinit var positionsGrid: IntArray
+        var stroi = RIHTER
     }
 
     init {
@@ -85,7 +84,8 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
 
         setting_id.setOnClickListener {
             tabsOrNotes = !tabsOrNotes
-            showHarmonica(positionsGrid, harp1.value!!, harp1.value!!, harp2.value!!, tabsOrNotes)
+            Util.clearView(this)
+            harp1.value = Harp(position = harp1.value!!.position, stroi = stroi)
             set3Hole(tabsOrNotes, harp1)
         }
 
@@ -93,7 +93,6 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
             viewModel.result.value = outputResult.text.dropLastWhile { it != ' ' }.dropLast(1).toString()
             viewModel.inPutText.value = inputResult.text.dropLastWhile { it != ' ' }.dropLast(1).toString()
         }
-
 
 
     }
@@ -142,8 +141,6 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
             }
         }
     }
-
-
 
 
     override fun afterTextChanged(s: Editable?) {

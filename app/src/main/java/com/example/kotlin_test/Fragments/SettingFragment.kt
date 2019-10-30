@@ -63,6 +63,7 @@ class SettingFragment : androidx.fragment.app.Fragment() {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, b: Boolean) {
                 Util.clearView(activity as Activity)
                 SecondActivity.positionsGrid = GridPosition.getSroi(progress)
+                SecondActivity.stroi = progress
                 view.textStroi.text = Util.STROI[progress]
                 harp1.value = Harp(position = harp1.value!!.position, stroi = progress)
                 textKey2.text = harp2.value!!.keyOfHarp
@@ -81,8 +82,9 @@ class SettingFragment : androidx.fragment.app.Fragment() {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, b: Boolean) {
                 Util.clearView(activity as Activity)
                 SecondActivity.positionsGrid = GridPosition.getSroi(progress)
+                SecondActivity.stroi = progress
                 view.textStroi2.text = Util.STROI[progress]
-                harp2.value = Harp(position = harp1.value!!.position, stroi = progress)
+                harp2.value = Harp(position = harp2.value!!.position, stroi = progress)
                 textKey2.text = harp2.value!!.keyOfHarp
                 viewModel.result.value = Util.getResult(harp1.value!!, harp2.value!!, viewModel.inPutText.value.toString())
             }

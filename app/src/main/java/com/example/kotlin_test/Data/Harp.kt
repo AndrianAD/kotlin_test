@@ -114,11 +114,11 @@ class Harp(var stroi: Int = RIHTER, var position: Int = 5) : ViewModel(), Lifecy
         tempList[9] = Pair(tempList[9].first, "-3'")
         tempList[10] = Pair(tempList[10].first, "-3")
         tempList[11] = Pair(tempList[11].first, "3*")
-        tempList[15] = Pair(tempList[15].first, "5")
+        tempList[15] = Pair(tempList[15].first, "+5")
         tempList[16] = Pair(tempList[16].first, "-5'")
         tempList[22] = Pair(tempList[22].first, "-7")
-        tempList[23] = Pair(tempList[23].first, "7'")
-        tempList[27] = Pair(tempList[27].first, "8")
+        tempList[23] = Pair(tempList[23].first, "+7'")
+        tempList[27] = Pair(tempList[27].first, "+8")
         tempList[28] = Pair(tempList[28].first, "-8*")
         return tempList
     }
