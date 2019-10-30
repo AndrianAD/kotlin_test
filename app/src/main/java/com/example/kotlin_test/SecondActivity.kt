@@ -31,24 +31,6 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
         positionsGrid = GridPosition.getSroi(RIHTER)
     }
 
-//
-//    private val scaleNote = object : HashMap<String, Int>() {
-//        init {
-//            put("G", 0)
-//            put("Ab", 1)
-//            put("A", 2)
-//            put("Bb", 3)
-//            put("B", 4)
-//            put("C", 5)
-//            put("C#", 6)
-//            put("D", 7)
-//            put("Eb", 8)
-//            put("E", 9)
-//            put("F", 10)
-//            put("F#", 11)
-//        }
-//    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
@@ -107,12 +89,12 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
         }
     }
 
-    fun showHarmonica(positionsGrid: IntArray, harp: Harp, harp1: Harp, harp2: Harp, tabsOrNotes: Boolean) {
+    private fun showHarmonica(positionsGrid: IntArray, harp: Harp, harp1: Harp, harp2: Harp, tabsOrNotes: Boolean) {
 
-        var arrayOfNotes = harp.splitAllNotesToList(harp.allnote, tabsOrNotes)
+        val arrayOfNotes = harp.splitAllNotesToList(harp.allnote, tabsOrNotes)
         //  val array_of_allTabs =all_Tabs.split(" ").toMutableList()
         var hole: TextView
-        var listOfActiveGrid: MutableList<TextView> = mutableListOf()
+        val listOfActiveGrid: MutableList<TextView> = mutableListOf()
 
         for (i in positionsGrid.indices) {
             hole = findViewById(positionsGrid[i])
@@ -126,18 +108,12 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
 
         var hole3 = findViewById<TextView>(R.id.b12)
         hole3.setOnClickListener {
-            if (tabsOrNotes.not()) {
-                viewModel.inPutText.value += " " + hole3.text.toString()
-                viewModel.result.value = Util.getResult(harp1, harp2, viewModel.inPutText.value!!)
-            }
+                viewModel.inPutText.value += " " + "+3"
         }
 
-        for (element in listOfActiveGrid) {
+        for ((index,element) in listOfActiveGrid.withIndex()) {
             element.setOnClickListener {
-                if (tabsOrNotes.not()) {
-                    viewModel.inPutText.value += " " + element.text.toString()
-
-                }
+                    viewModel.inPutText.value += " " + harp.allnote.get(index).second
             }
         }
     }
