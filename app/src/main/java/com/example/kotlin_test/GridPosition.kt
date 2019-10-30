@@ -1,8 +1,33 @@
 package com.example.kotlin_test
 
-import java.util.*
+import com.example.kotlin_test.Util.COUNTRY
+import com.example.kotlin_test.Util.MINOR
+import com.example.kotlin_test.Util.PADDY
+import com.example.kotlin_test.Util.RIHTER
 
 object GridPosition {
+
+
+    fun getSroi(stroi: Int): IntArray {
+        when (stroi) {
+            RIHTER -> {
+                return getRihter()
+            }
+            PADDY -> {
+                return getPaddy()
+            }
+            COUNTRY -> {
+                return getCountry()
+            }
+            MINOR -> {
+                return getNaturalMinor()
+            }
+            else -> {
+                return getRihter()
+            }
+        }
+    }
+
     fun getRihter(): IntArray {
         return intArrayOf(R.id.b10, R.id.b40, R.id.b30, R.id.b00, R.id.b11, R.id.b51, R.id.b41, R.id.b31,
                 R.id.b62, R.id.b52, R.id.b42, R.id.b32, R.id.b13, R.id.b43, R.id.b33, R.id.b03, R.id.b14,
@@ -39,7 +64,7 @@ object GridPosition {
         val positions_id_Country = getRihter()
         positions_id_Country[17] = R.id.b44
         positions_id_Country[18] = R.id.b34
-        return  positions_id_Country
+        return positions_id_Country
     }
 
 

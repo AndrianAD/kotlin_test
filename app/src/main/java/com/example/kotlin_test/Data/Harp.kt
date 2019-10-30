@@ -7,9 +7,13 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ViewModel
 import com.example.kotlin_test.Util
+import com.example.kotlin_test.Util.COUNTRY
+import com.example.kotlin_test.Util.MINOR
+import com.example.kotlin_test.Util.PADDY
+import com.example.kotlin_test.Util.RIHTER
 import java.util.*
 
-class Harp(var stroi: String = "Rihter", var position: Int = 5) : ViewModel(), LifecycleObserver {
+class Harp(var stroi: Int = RIHTER, var position: Int = 5) : ViewModel(), LifecycleObserver {
 
     var keyOfHarp: String = ""
     var allnote = arrayListOf<Pair<String, String>>()
@@ -59,7 +63,7 @@ class Harp(var stroi: String = "Rihter", var position: Int = 5) : ViewModel(), L
     }
 
 
-    fun makeharp(stroi: String, position: Int, textView: TextView) {
+    fun makeharp(stroi: Int, position: Int, textView: TextView) {
         allnote = makeAllNotes(stroi, position)
         keyOfHarp = allnote.get(0).first
         this.stroi = stroi
@@ -75,13 +79,13 @@ class Harp(var stroi: String = "Rihter", var position: Int = 5) : ViewModel(), L
         textView.setText(result)
     }
 
-    private fun makeAllNotes(stroi: String, position: Int): ArrayList<Pair<String, String>> {
+    private fun makeAllNotes(stroi: Int, position: Int): ArrayList<Pair<String, String>> {
         val tempList = makeRihterNotes(position)
         return when (stroi) {
-            "Rihter" -> tempList
-            "Paddy" -> makePaddyNotes(tempList)
-            "Country" -> makeCountryNotes(tempList)
-            "Нат. Минор" -> makeRihterNotes(position)
+            RIHTER -> tempList
+            PADDY -> makePaddyNotes(tempList)
+            COUNTRY -> makeCountryNotes(tempList)
+            MINOR -> makeMinorNotes(tempList)
 
             else -> throw IllegalArgumentException("Wrong stroi $stroi")
         }
@@ -99,6 +103,23 @@ class Harp(var stroi: String = "Rihter", var position: Int = 5) : ViewModel(), L
     private fun makePaddyNotes(tempList: ArrayList<Pair<String, String>>): ArrayList<Pair<String, String>> {
         tempList[8] = Pair(tempList[8].first, "2*")
         tempList[9] = Pair(tempList[9].first, "3")
+        return tempList
+    }
+
+
+    private fun makeMinorNotes(tempList: ArrayList<Pair<String, String>>) : ArrayList<Pair<String, String>>{
+        tempList[3] = Pair(tempList[3].first, "2")
+        tempList[4] = Pair(tempList[4].first, "-2'''")
+        tempList[8] = Pair(tempList[8].first, "-3''")
+        tempList[9] = Pair(tempList[9].first, "-3'")
+        tempList[10] = Pair(tempList[10].first, "-3")
+        tempList[11] = Pair(tempList[11].first, "3*")
+        tempList[15] = Pair(tempList[15].first, "5")
+        tempList[16] = Pair(tempList[16].first, "-5'")
+        tempList[22] = Pair(tempList[22].first, "-7")
+        tempList[23] = Pair(tempList[23].first, "7'")
+        tempList[27] = Pair(tempList[27].first, "8")
+        tempList[28] = Pair(tempList[28].first, "-8*")
         return tempList
     }
 

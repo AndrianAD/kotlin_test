@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
@@ -18,7 +19,7 @@ import java.security.AccessController
 
 object Util {
 
-    fun setupUI(view: View,context: Context) {
+    fun setupUI(view: View, context: Context) {
         // Set up touch listener for non-text box views to hide keyboard.
         if (view !is EditText) {
             view.setOnTouchListener { _, _ ->
@@ -31,7 +32,7 @@ object Util {
         if (view is ViewGroup) {
             for (i in 0 until view.childCount) {
                 val innerView = view.getChildAt(i)
-                setupUI(innerView,context)
+                setupUI(innerView, context)
             }
         }
     }
@@ -57,39 +58,49 @@ object Util {
     }
 
     fun getResult(ourHarp: Harp, selectedHarp: Harp, tabs: String): String {
-        return calculate(ourHarp, selectedHarp, tabs)
+        if (ourHarp.allnote.isEmpty() || selectedHarp.allnote.isEmpty()) {
+            return ""
+        }
+        val usersTabs = getInputTabs(tabs, ourHarp)
+        return changetabs(ourHarp, selectedHarp, usersTabs)
     }
 
     private fun getInputTabs(inputtabs: String, harp: Harp): MutableList<String> {
         val str = inputtabs.split(" ").toMutableList()
         for (index in str.indices)
-            if (str[index] == "+3" && harp.stroi !== "Падди") {
+            if (str[index] == "+3" && harp.stroi != PADDY) {
                 str[index] = "-2"
             }
         return str
     }
 
 
-     val majorScale = listOf(2, 2, 1, 2, 2, 2, 1)
-     val minorScale = listOf(2, 1, 2, 2, 1, 2, 2)
-     val bluesScale = listOf(3, 2, 1, 1, 3, 2)
-     val pentamajorScale = listOf(2, 2, 3, 2, 3)
-     val pentaminorScale = listOf(3, 2, 2, 3, 2)
+    val majorScale = listOf(2, 2, 1, 2, 2, 2, 1)
+    val minorScale = listOf(2, 1, 2, 2, 1, 2, 2)
+    val bluesScale = listOf(3, 2, 1, 1, 3, 2)
+    val pentamajorScale = listOf(2, 2, 3, 2, 3)
+    val pentaminorScale = listOf(3, 2, 2, 3, 2)
+
+    const val RIHTER = 0
+    const val PADDY = 1
+    const val COUNTRY = 2
+    const val MINOR = 3
+
 
     val TABS = arrayOf("+1", "-1'", "-1", "1*", "+2", "-2''", "-2'", "-2", "-3'''", "-3''", "-3'", "-3", "+4", "-4'",
             "-4", "4*", "+5", "-5", "5*", "+6", "-6'", "-6", "6*", "-7", "+7", "-7*", "-8", "8'", "+8", "-9", "9'",
             "+9", "-9*", "-10", "10''", "10'", "+10", "-10*", "", "", "", "", "", "", "", "", "", "", "")
     val NOTES = arrayOf("G", "Ab", "A", "Bb", "B", "C", "C#", "D", "Eb", "E", "F", "F#")
+
     val STROI = arrayOf("Rihter", "Paddy", "Country", "Нат. Минор")
 
-    private fun calculate(ourHarp: Harp, selectedHarp: Harp, string: String): String {
-        if (ourHarp.allnote.isEmpty() || selectedHarp.allnote.isEmpty()) {
-            return ""
+    fun clearView(activity: Activity) {
+        var hole: TextView
+        for (i in SecondActivity.positionsGrid.indices) {
+            hole = activity.findViewById(SecondActivity.positionsGrid[i])
+            hole.text = ""
         }
-        var usersTabs = Util.getInputTabs(string, ourHarp)
-        return changetabs(ourHarp, selectedHarp, usersTabs)
     }
-
 
     private fun changetabs(ourHarp: Harp, selectedHarp: Harp, usersTabs: MutableList<String>): String {
         var rezultat = ""

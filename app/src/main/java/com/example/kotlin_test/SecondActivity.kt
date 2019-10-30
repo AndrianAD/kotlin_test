@@ -1,5 +1,7 @@
 package com.example.kotlin_test
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,9 +11,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.example.kotlin_test.Data.Harp
+import com.example.kotlin_test.Util.RIHTER
 import kotlinx.android.synthetic.main.activity_second.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
-import java.util.*
 
 
 class SecondActivity : AppCompatActivity(), TextWatcher {
@@ -20,32 +22,32 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
         var harp2: MutableLiveData<Harp> = MutableLiveData()
         var tabsOrNotes: Boolean = true
         lateinit var viewModel: ViewModel
+        lateinit var positionsGrid: IntArray
     }
 
     init {
         harp1.value = Harp()
         harp2.value = Harp()
+        positionsGrid = GridPosition.getSroi(RIHTER)
     }
 
-
-    private var positionsGrid = GridPosition.getRihter()
-
-    private val scaleNote = object : HashMap<String, Int>() {
-        init {
-            put("G", 0)
-            put("Ab", 1)
-            put("A", 2)
-            put("Bb", 3)
-            put("B", 4)
-            put("C", 5)
-            put("C#", 6)
-            put("D", 7)
-            put("Eb", 8)
-            put("E", 9)
-            put("F", 10)
-            put("F#", 11)
-        }
-    }
+//
+//    private val scaleNote = object : HashMap<String, Int>() {
+//        init {
+//            put("G", 0)
+//            put("Ab", 1)
+//            put("A", 2)
+//            put("Bb", 3)
+//            put("B", 4)
+//            put("C", 5)
+//            put("C#", 6)
+//            put("D", 7)
+//            put("Eb", 8)
+//            put("E", 9)
+//            put("F", 10)
+//            put("F#", 11)
+//        }
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,11 +63,11 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
 
         harp1.observe(this, androidx.lifecycle.Observer {
             showHarmonica(positionsGrid, it!!, it, harp2.value!!, tabsOrNotes)
-            set3Hole(tabsOrNotes)
+            set3Hole(tabsOrNotes, harp1)
         })
         harp2.observe(this, androidx.lifecycle.Observer {
             showHarmonica(positionsGrid, it!!, harp1.value!!, it, tabsOrNotes)
-            set3Hole(tabsOrNotes)
+            set3Hole(tabsOrNotes, harp2)
         })
 
 
@@ -81,12 +83,10 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
         })
 
 
-
-
         setting_id.setOnClickListener {
             tabsOrNotes = !tabsOrNotes
             showHarmonica(positionsGrid, harp1.value!!, harp1.value!!, harp2.value!!, tabsOrNotes)
-            set3Hole(tabsOrNotes)
+            set3Hole(tabsOrNotes, harp1)
         }
 
         backspace.setOnClickListener {
@@ -94,19 +94,21 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
             viewModel.inPutText.value = inputResult.text.dropLastWhile { it != ' ' }.dropLast(1).toString()
         }
 
+
+
     }
 
-    private fun set3Hole(tabsOrNotes: Boolean) {
+    private fun set3Hole(tabsOrNotes: Boolean, harp: MutableLiveData<Harp>) {
         val hole = findViewById<TextView>(R.id.b12)
         if (tabsOrNotes) {
-            hole.text = harp1.value!!.allnote[7].first
+            hole.text = harp.value!!.allnote[7].first
 
         } else {
             hole.text = "+3"
         }
     }
 
-    private fun showHarmonica(positionsGrid: IntArray, harp: Harp, harp1: Harp, harp2: Harp, tabsOrNotes: Boolean) {
+    fun showHarmonica(positionsGrid: IntArray, harp: Harp, harp1: Harp, harp2: Harp, tabsOrNotes: Boolean) {
 
         var arrayOfNotes = harp.splitAllNotesToList(harp.allnote, tabsOrNotes)
         //  val array_of_allTabs =all_Tabs.split(" ").toMutableList()
@@ -141,13 +143,7 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
         }
     }
 
-    private fun clearView() {
-        var hole: TextView
-        for (i in positionsGrid.indices) {
-            hole = findViewById(positionsGrid[i])
-            hole.text = ""
-        }
-    }
+
 
 
     override fun afterTextChanged(s: Editable?) {
