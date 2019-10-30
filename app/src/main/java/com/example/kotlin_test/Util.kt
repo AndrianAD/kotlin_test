@@ -1,16 +1,56 @@
 package com.example.kotlin_test
 
 
+import android.app.Activity
 import android.content.Context
 import android.util.TypedValue
 import android.view.View
+import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 
 
 import com.example.kotlin_test.Data.Harp
+import java.security.AccessController
 
 
 object Util {
+
+    fun setupUI(view: View,context: Context) {
+        // Set up touch listener for non-text box views to hide keyboard.
+        if (view !is EditText) {
+            view.setOnTouchListener { _, _ ->
+                if (AccessController.getContext() != null)
+                    hideKeyboard(context)
+                false
+            }
+        }
+        //If a layout container, iterate over children and seed recursion.
+        if (view is ViewGroup) {
+            for (i in 0 until view.childCount) {
+                val innerView = view.getChildAt(i)
+                setupUI(innerView,context)
+            }
+        }
+    }
+
+    private fun hideKeyboard(context: Context) {
+        val inputManager =
+                context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        if ((context as Activity).currentFocus != null) {
+            try {
+                inputManager.hideSoftInputFromWindow(
+                        (context as AppCompatActivity).currentFocus!!.windowToken,
+                        0
+                )
+            } catch (ex: NullPointerException) {
+                ex.printStackTrace()
+            }
+
+        }
+    }
 
     fun Context.toast(message: String, duration: Int = Toast.LENGTH_LONG) {
         Toast.makeText(this, message, duration).show()

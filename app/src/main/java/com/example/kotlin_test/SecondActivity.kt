@@ -1,6 +1,8 @@
 package com.example.kotlin_test
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
@@ -12,9 +14,7 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 import java.util.*
 
 
-class SecondActivity : AppCompatActivity() {
-
-
+class SecondActivity : AppCompatActivity(), TextWatcher {
     companion object {
         var harp1: MutableLiveData<Harp> = MutableLiveData()
         var harp2: MutableLiveData<Harp> = MutableLiveData()
@@ -51,6 +51,7 @@ class SecondActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
 
+        Util.setupUI(window.decorView.rootView, this)
         viewModel = getViewModel()
 
 
@@ -73,9 +74,13 @@ class SecondActivity : AppCompatActivity() {
 
         })
 
+
+
         viewModel.inPutText.observe(this, androidx.lifecycle.Observer {
-            inputResult.text = it
+            inputResult.setText(it)
         })
+
+
 
 
         setting_id.setOnClickListener {
@@ -92,7 +97,7 @@ class SecondActivity : AppCompatActivity() {
     }
 
     private fun set3Hole(tabsOrNotes: Boolean) {
-        var hole = findViewById<TextView>(R.id.b12)
+        val hole = findViewById<TextView>(R.id.b12)
         if (tabsOrNotes) {
             hole.text = harp1.value!!.allnote[7].first
 
@@ -116,6 +121,7 @@ class SecondActivity : AppCompatActivity() {
             listOfActiveGrid.add(hole)
         }
 
+        inputResult.addTextChangedListener(this)
 
         var hole3 = findViewById<TextView>(R.id.b12)
         hole3.setOnClickListener {
@@ -129,7 +135,7 @@ class SecondActivity : AppCompatActivity() {
             element.setOnClickListener {
                 if (tabsOrNotes.not()) {
                     viewModel.inPutText.value += " " + element.text.toString()
-                    viewModel.result.value = Util.getResult(harp1, harp2, viewModel.inPutText.value!!)
+
                 }
             }
         }
@@ -144,8 +150,20 @@ class SecondActivity : AppCompatActivity() {
     }
 
 
+    override fun afterTextChanged(s: Editable?) {
+
+    }
+
+    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+    }
+
+    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        viewModel.result.value = Util.getResult(harp1.value!!, harp2.value!!, s.toString())
+    }
+
     override fun onBackPressed() {
     }
+
 }
 
 
