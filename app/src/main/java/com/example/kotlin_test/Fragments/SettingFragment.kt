@@ -27,9 +27,9 @@ class SettingFragment : androidx.fragment.app.Fragment() {
         view.seekBarKey.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, b: Boolean) {
-                harp1.value = Harp(position = progress)
+                var harp = Harp(position = progress)
                 textKey.text = harp1.value!!.keyOfHarp
-                viewModel.result.value = Util.getResult(harp1.value!!, harp2.value!!, viewModel.inPutText.value.toString())
+                viewModel.result.value = Util.getResult(harp, harp2.value!!, viewModel.inPutText.value.toString())
 
             }
 
@@ -44,9 +44,9 @@ class SettingFragment : androidx.fragment.app.Fragment() {
         view.seekBarKey2.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, b: Boolean) {
-                harp2.value = Harp(position = progress)
+                var harp = Harp(position = progress)
                 textKey2.text = harp2.value!!.keyOfHarp
-                viewModel.result.value = Util.getResult(harp1.value!!, harp2.value!!, viewModel.inPutText.value.toString())
+                viewModel.result.value = Util.getResult(harp1.value!!, harp, viewModel.inPutText.value.toString())
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {

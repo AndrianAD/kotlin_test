@@ -1,5 +1,6 @@
 package com.example.kotlin_test
 
+import android.app.Activity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -84,7 +85,6 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
 
         setting_id.setOnClickListener {
             tabsOrNotes = !tabsOrNotes
-            Util.clearView(this)
             harp1.value = Harp(position = harp1.value!!.position, stroi = stroi)
             set3Hole(tabsOrNotes, harp1)
         }
