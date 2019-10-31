@@ -86,7 +86,6 @@ class Harp(var stroi: Int = RIHTER, var position: Int = 5) : ViewModel(), Lifecy
             PADDY -> makePaddyNotes(tempList)
             COUNTRY -> makeCountryNotes(tempList)
             MINOR -> makeMinorNotes(tempList)
-
             else -> throw IllegalArgumentException("Wrong stroi $stroi")
         }
     }
@@ -102,13 +101,13 @@ class Harp(var stroi: Int = RIHTER, var position: Int = 5) : ViewModel(), Lifecy
 
     private fun makePaddyNotes(tempList: ArrayList<Pair<String, String>>): ArrayList<Pair<String, String>> {
         tempList[8] = Pair(tempList[8].first, "2*")
-        tempList[9] = Pair(tempList[9].first, "3")
+        tempList[9] = Pair(tempList[9].first, "+3")
         return tempList
     }
 
 
     private fun makeMinorNotes(tempList: ArrayList<Pair<String, String>>) : ArrayList<Pair<String, String>>{
-        tempList[3] = Pair(tempList[3].first, "2")
+        tempList[3] = Pair(tempList[3].first, "+2")
         tempList[4] = Pair(tempList[4].first, "-2'''")
         tempList[8] = Pair(tempList[8].first, "-3''")
         tempList[9] = Pair(tempList[9].first, "-3'")

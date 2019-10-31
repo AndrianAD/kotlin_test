@@ -69,7 +69,7 @@ object Util {
         val str = inputtabs.split(" ").toMutableList()
         for (index in str.indices)
             if (str[index] == "+3" && harp.stroi != PADDY) {
-                str[index] = "-2"
+                str[index] = "+2"
             }
         return str
     }

@@ -1,6 +1,5 @@
 package com.example.kotlin_test
 
-import android.app.Activity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -17,8 +16,9 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class SecondActivity : AppCompatActivity(), TextWatcher {
     companion object {
-        var harp1: MutableLiveData<Harp> = MutableLiveData()
-        var harp2: MutableLiveData<Harp> = MutableLiveData()
+        lateinit var harp1: Harp
+        lateinit var harp2: Harp
+        var showHarmonica: MutableLiveData<Boolean> = MutableLiveData()
         var tabsOrNotes: Boolean = true
         lateinit var viewModel: ViewModel
         lateinit var positionsGrid: IntArray
@@ -26,8 +26,8 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
     }
 
     init {
-        harp1.value = Harp()
-        harp2.value = Harp()
+        harp1 = Harp()
+        harp2 = Harp()
         positionsGrid = GridPosition.getSroi(RIHTER)
     }
 
@@ -35,21 +35,26 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
 
+        //Close keyboard on click
         Util.setupUI(window.decorView.rootView, this)
+        // ViewModel
         viewModel = getViewModel()
 
+        //Show Harmonica
+        showHarmonica(positionsGrid, harp1, tabsOrNotes)
+        set3Hole(tabsOrNotes, harp1)
 
-        var navController = Navigation.findNavController(this, R.id.nav_host_fragment)
+        // NavController
+        val navController = Navigation.findNavController(this, R.id.nav_host_fragment)
         NavigationUI.setupWithNavController(bottom_nav, navController)
 
+        // TextWatcher
+        inputResult.addTextChangedListener(this)
 
-        harp1.observe(this, androidx.lifecycle.Observer {
-            showHarmonica(positionsGrid, it!!, it, harp2.value!!, tabsOrNotes)
+        //----------------------------------------------------
+        showHarmonica.observe(this, androidx.lifecycle.Observer {
+            showHarmonica(positionsGrid, harp1, tabsOrNotes)
             set3Hole(tabsOrNotes, harp1)
-        })
-        harp2.observe(this, androidx.lifecycle.Observer {
-            showHarmonica(positionsGrid, it!!, harp1.value!!, it, tabsOrNotes)
-            set3Hole(tabsOrNotes, harp2)
         })
 
 
@@ -67,7 +72,7 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
 
         setting_id.setOnClickListener {
             tabsOrNotes = !tabsOrNotes
-            harp1.value = Harp(position = harp1.value!!.position, stroi = stroi)
+            showHarmonica(positionsGrid, harp1, tabsOrNotes)
             set3Hole(tabsOrNotes, harp1)
         }
 
@@ -79,17 +84,17 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
 
     }
 
-    private fun set3Hole(tabsOrNotes: Boolean, harp: MutableLiveData<Harp>) {
+    private fun set3Hole(tabsOrNotes: Boolean, harp: Harp) {
         val hole = findViewById<TextView>(R.id.b12)
         if (tabsOrNotes) {
-            hole.text = harp.value!!.allnote[7].first
+            hole.text = harp.allnote[7].first
 
         } else {
             hole.text = "+3"
         }
     }
 
-    private fun showHarmonica(positionsGrid: IntArray, harp: Harp, harp1: Harp, harp2: Harp, tabsOrNotes: Boolean) {
+    fun showHarmonica(positionsGrid: IntArray, harp: Harp, tabsOrNotes: Boolean) {
 
         val arrayOfNotes = harp.splitAllNotesToList(harp.allnote, tabsOrNotes)
         //  val array_of_allTabs =all_Tabs.split(" ").toMutableList()
@@ -104,16 +109,15 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
             listOfActiveGrid.add(hole)
         }
 
-        inputResult.addTextChangedListener(this)
 
         var hole3 = findViewById<TextView>(R.id.b12)
         hole3.setOnClickListener {
-                viewModel.inPutText.value += " " + "+3"
+            viewModel.inPutText.value += " " + "+3"
         }
 
-        for ((index,element) in listOfActiveGrid.withIndex()) {
+        for ((index, element) in listOfActiveGrid.withIndex()) {
             element.setOnClickListener {
-                    viewModel.inPutText.value += " " + harp.allnote.get(index).second
+                viewModel.inPutText.value += " " + harp.allnote.get(index).second
             }
         }
     }
@@ -127,7 +131,7 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
     }
 
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-        viewModel.result.value = Util.getResult(harp1.value!!, harp2.value!!, s.toString())
+        viewModel.result.value = Util.getResult(harp1, harp2, s.toString())
     }
 
     override fun onBackPressed() {

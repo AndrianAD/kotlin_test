@@ -21,8 +21,8 @@ class ScaleFragment : androidx.fragment.app.Fragment() {
 
 
         view.checkBox__major.setOnClickListener {
-            var list = SecondActivity.harp1.value!!.allnote.slice(Util.majorScale)
-            var list2 = SecondActivity.harp1.value!!.allnote.slice(Util.majorScale)
+            var list = SecondActivity.harp1.allnote.slice(Util.majorScale)
+            var list2 = SecondActivity.harp1.allnote.slice(Util.majorScale)
         }
 
         return view

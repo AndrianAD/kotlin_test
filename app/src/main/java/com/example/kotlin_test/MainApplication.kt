@@ -19,11 +19,8 @@ class MainApplication : Application() {
         instance = this
 
         startKoin {
-            // use AndroidLogger as Koin Logger - default Level.INFO
             androidLogger()
-            // use the Android context given there
             androidContext(this@MainApplication)
-            // module list
             modules(firstModule)
         }
     }

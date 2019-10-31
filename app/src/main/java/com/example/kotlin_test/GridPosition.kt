@@ -37,34 +37,34 @@ object GridPosition {
     }
 
     fun getPaddy(): IntArray {
-        val positions_id_Paddy = getRihter()
-        positions_id_Paddy[8] = R.id.b01
-        positions_id_Paddy[9] = R.id.b12
-        return positions_id_Paddy
+        val positionsIdPaddy = getRihter()
+        positionsIdPaddy[8] = R.id.b01
+        positionsIdPaddy[9] = R.id.b12
+        return positionsIdPaddy
     }
 
     fun getNaturalMinor(): IntArray {
-        val positions_id_Natural_Minor = getRihter()
-        positions_id_Natural_Minor[3] = R.id.b11
-        positions_id_Natural_Minor[4] = R.id.b61
-        positions_id_Natural_Minor[8] = R.id.b52
-        positions_id_Natural_Minor[9] = R.id.b42
-        positions_id_Natural_Minor[10] = R.id.b32
-        positions_id_Natural_Minor[11] = R.id.b02
-        positions_id_Natural_Minor[15] = R.id.b14
-        positions_id_Natural_Minor[16] = R.id.b44
-        positions_id_Natural_Minor[22] = R.id.b36
-        positions_id_Natural_Minor[23] = R.id.b06
-        positions_id_Natural_Minor[27] = R.id.b17
-        positions_id_Natural_Minor[28] = R.id.b47
-        return positions_id_Natural_Minor
+        val positionsIdNaturalMinor = getRihter()
+        positionsIdNaturalMinor[3] = R.id.b11
+        positionsIdNaturalMinor[4] = R.id.b61
+        positionsIdNaturalMinor[8] = R.id.b52
+        positionsIdNaturalMinor[9] = R.id.b42
+        positionsIdNaturalMinor[10] = R.id.b32
+        positionsIdNaturalMinor[11] = R.id.b02
+        positionsIdNaturalMinor[15] = R.id.b14
+        positionsIdNaturalMinor[16] = R.id.b44
+        positionsIdNaturalMinor[22] = R.id.b36
+        positionsIdNaturalMinor[23] = R.id.b06
+        positionsIdNaturalMinor[27] = R.id.b17
+        positionsIdNaturalMinor[28] = R.id.b47
+        return positionsIdNaturalMinor
     }
 
     fun getCountry(): IntArray {
-        val positions_id_Country = getRihter()
-        positions_id_Country[17] = R.id.b44
-        positions_id_Country[18] = R.id.b34
-        return positions_id_Country
+        val positionsIdCountry = getRihter()
+        positionsIdCountry[17] = R.id.b44
+        positionsIdCountry[18] = R.id.b34
+        return positionsIdCountry
     }
 
 
