@@ -57,6 +57,11 @@ class SettingFragment : androidx.fragment.app.Fragment() {
 
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, b: Boolean) {
 
+                    harp2 = Harp(position = progress)
+                    textKey2.text = harp2.keyOfHarp
+                    viewModel.result.value = Util.getResult(harp1, harp2, viewModel.inPutText.value.toString())
+
+
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {
@@ -91,19 +96,11 @@ class SettingFragment : androidx.fragment.app.Fragment() {
         view.seekBarStroi2.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, b: Boolean) {
-                if (tabsOrNotes) {
-                    Util.clearView(activity as Activity)
-                    SecondActivity.positionsGrid = GridPosition.getSroi(progress)
-                    SecondActivity.stroi = progress
-                    view.textStroi2.text = Util.STROI[progress]
-                    harp2 = Harp(position = harp2.position, stroi = progress)
-                } else {
-                    SecondActivity.positionsGrid = GridPosition.getSroi(progress)
-                    SecondActivity.stroi = progress
-                    view.textStroi2.text = Util.STROI[progress]
-                    harp2 = Harp(position = harp2.position, stroi = progress)
-                }
-
+                SecondActivity.positionsGrid = GridPosition.getSroi(progress)
+                SecondActivity.stroi = progress
+                view.textStroi2.text = Util.STROI[progress]
+                harp2 = Harp(stroi = progress, position = harp1.position)
+                viewModel.result.value = Util.getResult(harp1, harp2, viewModel.inPutText.value.toString())
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {
