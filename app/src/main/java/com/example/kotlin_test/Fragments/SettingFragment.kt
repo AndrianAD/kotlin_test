@@ -25,7 +25,6 @@ class SettingFragment : androidx.fragment.app.Fragment() {
                               savedInstanceState: Bundle?): View? {
         val view: View = inflater.inflate(R.layout.fragment_setting, container, false)
 
-
         viewModel = getSharedViewModel()
         view.seekBarKey.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
@@ -41,8 +40,6 @@ class SettingFragment : androidx.fragment.app.Fragment() {
                     textKey.text = harp1.keyOfHarp
                     viewModel.result.value = Util.getResult(harp1, harp2, viewModel.inPutText.value.toString())
                 }
-
-
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {
@@ -52,16 +49,12 @@ class SettingFragment : androidx.fragment.app.Fragment() {
             }
         })
 
-
         view.seekBarKey2.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, b: Boolean) {
-
                     harp2 = Harp(position = progress)
                     textKey2.text = harp2.keyOfHarp
                     viewModel.result.value = Util.getResult(harp1, harp2, viewModel.inPutText.value.toString())
-
-
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {

@@ -69,7 +69,7 @@ object Util {
         val str = inputtabs.split(" ").toMutableList()
         for (index in str.indices)
             if (str[index] == "+3" && harp.stroi != PADDY) {
-                str[index] = "+2"
+                str[index] = "-2"
             }
         return str
     }
@@ -131,7 +131,7 @@ object Util {
     }
 
 
-    private fun checkDifferencePosition(n: Int, z: Int): Int {
+     fun checkDifferencePosition(n: Int, z: Int): Int {
         val temps = z - n
         for (i in -1 downTo -11) {
             if (temps == i) return 12 - -i
