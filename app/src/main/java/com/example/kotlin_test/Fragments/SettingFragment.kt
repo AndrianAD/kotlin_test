@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
+import androidx.fragment.app.Fragment
 import com.example.kotlin_test.*
 import com.example.kotlin_test.Data.Harp
 import com.example.kotlin_test.SecondActivity.Companion.harp1
@@ -18,7 +19,7 @@ import kotlinx.android.synthetic.main.fragment_setting.view.*
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 
-class SettingFragment : androidx.fragment.app.Fragment() {
+class SettingFragment : Fragment() {
 
     lateinit var viewModel: ViewModel
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

@@ -1,11 +1,6 @@
 package com.example.kotlin_test.Data
 
-import android.util.Log
 import android.widget.TextView
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
-import androidx.lifecycle.ViewModel
 import com.example.kotlin_test.Util
 import com.example.kotlin_test.Util.COUNTRY
 import com.example.kotlin_test.Util.MINOR
@@ -13,7 +8,8 @@ import com.example.kotlin_test.Util.PADDY
 import com.example.kotlin_test.Util.RIHTER
 import java.util.*
 
-class Harp(var stroi: Int = RIHTER, var position: Int = 5) : ViewModel(), LifecycleObserver {
+
+class Harp(var stroi: Int = RIHTER, var position: Int = 5) {
 
     var keyOfHarp: String = ""
     var allnote = arrayListOf<Pair<String, String>>()
@@ -23,28 +19,6 @@ class Harp(var stroi: Int = RIHTER, var position: Int = 5) : ViewModel(), Lifecy
     init {
         allnote = makeAllNotes(stroi, position)
         keyOfHarp = allnote[0].first
-    }
-
-    //LIFECYCLE
-    //------------------------------------
-    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    fun OnCreateEvent() {
-        Log.i(TAG, "ON_CREATE")
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    fun OnStartEvent() {
-        Log.i(TAG, "ON_START")
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    fun OnStopEvent() {
-        Log.i(TAG, "ON_STOP")
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-    fun OnPauseEvent() {
-        Log.i(TAG, "ON_PAUSE")
     }
 
 
@@ -106,7 +80,7 @@ class Harp(var stroi: Int = RIHTER, var position: Int = 5) : ViewModel(), Lifecy
     }
 
 
-    private fun makeMinorNotes(tempList: ArrayList<Pair<String, String>>) : ArrayList<Pair<String, String>>{
+    private fun makeMinorNotes(tempList: ArrayList<Pair<String, String>>): ArrayList<Pair<String, String>> {
         tempList[3] = Pair(tempList[3].first, "+2")
         tempList[4] = Pair(tempList[4].first, "-2'''")
         tempList[8] = Pair(tempList[8].first, "-3''")
@@ -141,12 +115,6 @@ class Harp(var stroi: Int = RIHTER, var position: Int = 5) : ViewModel(), Lifecy
         for (element in list)
             temp += if (tabsOrNote) element.first + " " else element.second + " "
         return temp.split(" ").toMutableList()
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        Log.i(TAG, "onCleared Метод сработал")
-
     }
 
 }

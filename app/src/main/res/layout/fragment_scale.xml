@@ -9,9 +9,20 @@
     tools:context=".Fragments.ScaleFragment">
 
 
+    <Spinner
+        android:id="@+id/tonica"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:entries="@array/harmonica_key"
+        android:layout_marginStart="40dp"
+        android:padding="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/checkBox__major" />
+
     <CheckBox
         android:id="@+id/checkBox__major"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:text="Мажорная гамма"

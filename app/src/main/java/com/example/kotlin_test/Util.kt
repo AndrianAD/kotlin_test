@@ -15,7 +15,12 @@ import androidx.appcompat.app.AppCompatActivity
 
 import com.example.kotlin_test.Data.Harp
 import java.security.AccessController
+import java.util.HashMap
 
+
+fun Context.toast(message: String, duration: Int = Toast.LENGTH_LONG) {
+    Toast.makeText(this, message, duration).show()
+}
 
 object Util {
 
@@ -53,9 +58,6 @@ object Util {
         }
     }
 
-    fun Context.toast(message: String, duration: Int = Toast.LENGTH_LONG) {
-        Toast.makeText(this, message, duration).show()
-    }
 
     fun getResult(ourHarp: Harp, selectedHarp: Harp, tabs: String): String {
         if (ourHarp.allnote.isEmpty() || selectedHarp.allnote.isEmpty()) {
@@ -137,6 +139,24 @@ object Util {
             if (temps == i) return 12 - -i
         }
         return temps
+    }
+
+
+     val scaleNote = object : HashMap<String, Int>() {
+        init {
+            put("G", 0)
+            put("Ab", 1)
+            put("A", 2)
+            put("Bb", 3)
+            put("B", 4)
+            put("C", 5)
+            put("C#", 6)
+            put("D", 7)
+            put("Eb", 8)
+            put("E", 9)
+            put("F", 10)
+            put("F#", 11)
+        }
     }
 
 
