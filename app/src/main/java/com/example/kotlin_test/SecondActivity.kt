@@ -3,6 +3,7 @@ package com.example.kotlin_test
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.SeekBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
@@ -82,6 +83,51 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
         }
 
 
+        seekBarKey.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, b: Boolean) {
+                if (tabsOrNotes) {
+                    harp1 = Harp(position = progress)
+                    textKey.text = harp1.keyOfHarp
+                    SecondActivity.showHarmonica.value = true
+                    viewModel.result.value = Util.getResult(harp1, harp2, viewModel.inPutText.value.toString())
+                } else {
+                    harp1 = Harp(position = progress)
+                    textKey.text = harp1.keyOfHarp
+                    viewModel.result.value = Util.getResult(harp1, harp2, viewModel.inPutText.value.toString())
+                }
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar) {
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar) {
+            }
+        })
+
+
+
+        seekBarStroi.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, b: Boolean) {
+                Util.clearView(this@SecondActivity)
+                positionsGrid = GridPosition.getSroi(progress)
+                stroi = progress
+                textStroi.text = Util.STROI[progress]
+                harp1 = Harp(stroi = progress, position = harp1.position)
+                showHarmonica.value = true
+                viewModel.result.value = Util.getResult(harp1, harp2, viewModel.inPutText.value.toString())
+
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar) {
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar) {
+            }
+        })
+
+
     }
 
     private fun set3Hole(tabsOrNotes: Boolean, harp: Harp) {
@@ -110,14 +156,14 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
         }
 
 
-        var hole3 = findViewById<TextView>(R.id.b12)
+        val hole3 = findViewById<TextView>(R.id.b12)
         hole3.setOnClickListener {
             viewModel.inPutText.value += " " + "+3"
         }
 
         for ((index, element) in listOfActiveGrid.withIndex()) {
             element.setOnClickListener {
-                viewModel.inPutText.value += " " + harp.allnote.get(index).second
+                viewModel.inPutText.value += " " + harp.allnote[index].second
             }
         }
     }

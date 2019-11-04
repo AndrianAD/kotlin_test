@@ -10,17 +10,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.kotlin_test.R
 import com.example.kotlin_test.SecondActivity.Companion.harp1
+import com.example.kotlin_test.SecondActivity.Companion.showHarmonica
 import com.example.kotlin_test.Util
 import com.example.kotlin_test.Util.scaleNote
 import kotlinx.android.synthetic.main.fragment_scale.view.*
 
 class ScaleFragment : Fragment() {
 
-    var selectedTonicaINT: Int = 0
+    var selectedTonicaINT: Int = 5
     var selectedTonicaString: String = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -31,8 +31,7 @@ class ScaleFragment : Fragment() {
 
         makeAllScales(view)
 
-
-        var adapter: ArrayAdapter<*> = ArrayAdapter.createFromResource(activity, R.array.harmonica_key, android.R.layout.simple_spinner_item)
+        val adapter: ArrayAdapter<*> = ArrayAdapter.createFromResource(activity, R.array.harmonica_key, android.R.layout.simple_spinner_item)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         view.tonica.adapter = adapter
         view.tonica.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -41,9 +40,11 @@ class ScaleFragment : Fragment() {
 
                 val choose = resources.getStringArray(R.array.harmonica_key)
                 selectedTonicaString = choose[selectedItemPosition]
-                if (scaleNote.containsKey(selectedTonicaString));
-                selectedTonicaINT = scaleNote[selectedTonicaString]!!
+                if (scaleNote.containsKey(selectedTonicaString))
+                    selectedTonicaINT = scaleNote[selectedTonicaString]!!
                 makeAllScales(view)
+                harp1.keyOfHarp = selectedTonicaString
+                showHarmonica.value = false
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
@@ -51,83 +52,82 @@ class ScaleFragment : Fragment() {
 
         view.checkBox__major.setOnClickListener {
             val flag = it.checkBox__major.isChecked
-            makeScale(!flag, Util.majorScale, view.gamma_major)
+            view.gamma_major.text = makeScale(!flag, Util.majorScale)
         }
 
         view.checkBox_minor.setOnClickListener {
             val flag = it.checkBox_minor.isChecked
-            makeScale(!flag, Util.minorScale, view.gamma_minor)
+            view.gamma_minor.text = makeScale(!flag, Util.minorScale)
         }
 
         view.checkBox_blues.setOnClickListener {
             val flag = it.checkBox_blues.isChecked
-            makeScale(!flag, Util.bluesScale, view.gamma_blues)
+            view.gamma_blues.text = makeScale(!flag, Util.bluesScale)
         }
 
         view.checkBox_penta_major.setOnClickListener {
             val flag = it.checkBox_penta_major.isChecked
-            makeScale(!flag, Util.pentamajorScale, view.penta_major)
+            view.penta_major.text = makeScale(!flag, Util.pentaminorScale)
         }
 
         view.checkBox_penta_minor.setOnClickListener {
             val flag = it.checkBox_penta_minor.isChecked
-            makeScale(!flag, Util.pentaminorScale, view.penta_minor)
+            view.penta_minor.text = makeScale(!flag, Util.pentamajorScale)
         }
+
 
         return view
     }
 
     private fun makeAllScales(view: View) {
-        makeScale(true, Util.majorScale, view.gamma_major)
-        makeScale(true, Util.minorScale, view.gamma_minor)
-        makeScale(true, Util.bluesScale, view.gamma_blues)
-        makeScale(true, Util.pentaminorScale, view.penta_minor)
-        makeScale(true, Util.pentamajorScale, view.penta_major)
+        view.gamma_major.text = makeScale(true, Util.majorScale)
+        view.gamma_minor.text = makeScale(true, Util.minorScale)
+        view.gamma_blues.text = makeScale(true, Util.bluesScale)
+        view.penta_minor.text = makeScale(true, Util.pentaminorScale)
+        view.penta_major.text = makeScale(true, Util.pentamajorScale)
     }
 
 
-    fun makeScale(isChecked: Boolean, scaleArray: List<Int>, textView: TextView) {
+    private fun makeScale(isChecked: Boolean, scaleArray: List<Int>): SpannableStringBuilder {
         val differencePosition = Util.checkDifferencePosition(harp1.position, selectedTonicaINT)
         var i = 0
         var j = 0
+        val allNotes = harp1.allnote
         var index: Int
         var nots: Pair<String, String>
         var result = ""
         while (i < 37 - differencePosition) {
             index = scaleArray[j]
-            nots = harp1.allnote[i + differencePosition]
+            nots = allNotes[i + differencePosition]
             j++
             if (j == scaleArray.size) {
                 j = 0
             }
-            var temp = if (isChecked) nots.first + " " else nots.second + " "
+            val temp = if (isChecked) nots.first + " " else nots.second + " "
             result += temp
             i += index
         }
 
-        nots = harp1.allnote[differencePosition]
-        val firstTonica = if (isChecked) nots.first + " " else nots.second + " "
-        nots = harp1.allnote[differencePosition + 12]
-        val secondTonica = if (isChecked) nots.first + " " else nots.second + " "
-        nots = harp1.allnote[differencePosition + 24]
-        val thirdTonica = if (isChecked) nots.first + " " else nots.second + " "
-        val lenght = firstTonica.length
-        val lenght2 = secondTonica.length
-        val lenght3 = thirdTonica.length
-        val indexTonica = if (isChecked) result.indexOf(firstTonica) else result.indexOf(firstTonica)
-        val indexTonica2 = if (isChecked) result.indexOf(secondTonica, indexTonica + 1) else result.indexOf(secondTonica)
+        return spannableStringBuilder(isChecked, allNotes, differencePosition, result)
+
+    }
+
+
+    private fun spannableStringBuilder(isChecked: Boolean, allNotes: ArrayList<Pair<String, String>>, differencePosition: Int, result: String): SpannableStringBuilder {
+        val firstTonica = if (isChecked) allNotes[differencePosition].first + " " else allNotes[differencePosition].second + " "
+        val secondTonica = if (isChecked) allNotes[differencePosition + 12].first + " " else allNotes[differencePosition + 12].second + " "
+        val thirdTonica = if (isChecked) allNotes[differencePosition + 24].first + " " else allNotes[differencePosition + 24].second + " "
+        val indexTonica1 = if (isChecked) result.indexOf(firstTonica) else result.indexOf(firstTonica)
+        val indexTonica2 = if (isChecked) result.indexOf(secondTonica, indexTonica1 + 1) else result.indexOf(secondTonica)
         val indexTonica3 = if (isChecked) result.indexOf(thirdTonica, indexTonica2 + 1) else result.indexOf(thirdTonica)
 
         val sb = SpannableStringBuilder(result)
-        sb.setSpan(ForegroundColorSpan(Color.RED), indexTonica, indexTonica + lenght, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+        sb.setSpan(ForegroundColorSpan(Color.RED), indexTonica1, indexTonica1 + firstTonica.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
         val sb2 = SpannableStringBuilder(sb)
-        sb2.setSpan(ForegroundColorSpan(Color.BLUE), indexTonica2, indexTonica2 + lenght2, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+        sb2.setSpan(ForegroundColorSpan(Color.BLUE), indexTonica2, indexTonica2 + secondTonica.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
         val sb3 = SpannableStringBuilder(sb2)
-        sb3.setSpan(ForegroundColorSpan(Color.MAGENTA), indexTonica3, indexTonica3 + lenght3, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
-
-
-        textView.text = sb3
-
+        sb3.setSpan(ForegroundColorSpan(Color.MAGENTA), indexTonica3, indexTonica3 + thirdTonica.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+        return sb3
     }
 
 

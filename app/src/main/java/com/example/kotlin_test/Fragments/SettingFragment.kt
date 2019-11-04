@@ -14,6 +14,7 @@ import com.example.kotlin_test.SecondActivity.Companion.harp2
 import com.example.kotlin_test.SecondActivity.Companion.showHarmonica
 import com.example.kotlin_test.SecondActivity.Companion.tabsOrNotes
 import kotlinx.android.synthetic.main.activity_second.*
+import kotlinx.android.synthetic.main.activity_second.view.*
 import kotlinx.android.synthetic.main.fragment_setting.*
 import kotlinx.android.synthetic.main.fragment_setting.view.*
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
@@ -27,28 +28,7 @@ class SettingFragment : Fragment() {
         val view: View = inflater.inflate(R.layout.fragment_setting, container, false)
 
         viewModel = getSharedViewModel()
-        view.seekBarKey.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
-            override fun onProgressChanged(seekBar: SeekBar, progress: Int, b: Boolean) {
-                if(tabsOrNotes){
-                    harp1 = Harp(position = progress)
-                    textKey.text = harp1.keyOfHarp
-                    showHarmonica.value = true
-                    viewModel.result.value = Util.getResult(harp1, harp2, viewModel.inPutText.value.toString())
-                }
-                else{
-                    harp1 = Harp(position = progress)
-                    textKey.text = harp1.keyOfHarp
-                    viewModel.result.value = Util.getResult(harp1, harp2, viewModel.inPutText.value.toString())
-                }
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar) {
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar) {
-            }
-        })
 
         view.seekBarKey2.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
@@ -56,28 +36,6 @@ class SettingFragment : Fragment() {
                     harp2 = Harp(position = progress)
                     textKey2.text = harp2.keyOfHarp
                     viewModel.result.value = Util.getResult(harp1, harp2, viewModel.inPutText.value.toString())
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar) {
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar) {
-            }
-        })
-
-
-
-        view.seekBarStroi.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-
-            override fun onProgressChanged(seekBar: SeekBar, progress: Int, b: Boolean) {
-                Util.clearView(activity as Activity)
-                SecondActivity.positionsGrid = GridPosition.getSroi(progress)
-                SecondActivity.stroi = progress
-                view.textStroi.text = Util.STROI[progress]
-                harp1 = Harp(stroi = progress, position = harp1.position)
-                showHarmonica.value = true
-                viewModel.result.value = Util.getResult(harp1, harp2, viewModel.inPutText.value.toString())
-
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {

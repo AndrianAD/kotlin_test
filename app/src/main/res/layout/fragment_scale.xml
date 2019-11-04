@@ -16,9 +16,10 @@
         android:layout_height="wrap_content"
         android:entries="@array/harmonica_key"
         android:layout_marginStart="40dp"
-        android:padding="10dp"
+        android:padding="5dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/checkBox__major" />
+        app:layout_constraintTop_toTopOf="@id/checkBox__major"
+        app:layout_constraintBottom_toBottomOf="@id/checkBox__major"/>
 
     <CheckBox
         android:id="@+id/checkBox__major"

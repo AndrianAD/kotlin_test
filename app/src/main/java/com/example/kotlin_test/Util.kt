@@ -11,11 +11,9 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-
-
 import com.example.kotlin_test.Data.Harp
 import java.security.AccessController
-import java.util.HashMap
+import java.util.*
 
 
 fun Context.toast(message: String, duration: Int = Toast.LENGTH_LONG) {
@@ -101,6 +99,12 @@ object Util {
         for (i in SecondActivity.positionsGrid.indices) {
             hole = activity.findViewById(SecondActivity.positionsGrid[i])
             hole.text = ""
+            val defaultColor = activity.resources.getColor(R.color.Default)
+
+            if (hole.currentTextColor != defaultColor) {
+                hole.setTextColor(defaultColor)
+            }
+
         }
     }
 
@@ -133,7 +137,7 @@ object Util {
     }
 
 
-     fun checkDifferencePosition(n: Int, z: Int): Int {
+    fun checkDifferencePosition(n: Int, z: Int): Int {
         val temps = z - n
         for (i in -1 downTo -11) {
             if (temps == i) return 12 - -i
@@ -142,7 +146,7 @@ object Util {
     }
 
 
-     val scaleNote = object : HashMap<String, Int>() {
+    val scaleNote = object : HashMap<String, Int>() {
         init {
             put("G", 0)
             put("Ab", 1)
