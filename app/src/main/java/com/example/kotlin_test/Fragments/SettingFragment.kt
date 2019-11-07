@@ -1,6 +1,5 @@
 package com.example.kotlin_test.Fragments
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,10 +10,7 @@ import com.example.kotlin_test.*
 import com.example.kotlin_test.Data.Harp
 import com.example.kotlin_test.SecondActivity.Companion.harp1
 import com.example.kotlin_test.SecondActivity.Companion.harp2
-import com.example.kotlin_test.SecondActivity.Companion.showHarmonica
-import com.example.kotlin_test.SecondActivity.Companion.tabsOrNotes
 import kotlinx.android.synthetic.main.activity_second.*
-import kotlinx.android.synthetic.main.activity_second.view.*
 import kotlinx.android.synthetic.main.fragment_setting.*
 import kotlinx.android.synthetic.main.fragment_setting.view.*
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
@@ -33,16 +29,13 @@ class SettingFragment : Fragment() {
         view.seekBarKey2.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, b: Boolean) {
-                    harp2 = Harp(position = progress)
-                    textKey2.text = harp2.keyOfHarp
-                    viewModel.result.value = Util.getResult(harp1, harp2, viewModel.inPutText.value.toString())
+                harp2 = Harp(position = progress)
+                textKey2.text = harp2.keyOfHarp
+                viewModel.result.value = Util.getResult(harp1, harp2, viewModel.inPutText.value.toString())
             }
 
-            override fun onStartTrackingTouch(seekBar: SeekBar) {
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar) {
-            }
+            override fun onStartTrackingTouch(seekBar: SeekBar) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar) {}
         })
 
         view.seekBarStroi2.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
@@ -51,15 +44,12 @@ class SettingFragment : Fragment() {
                 SecondActivity.positionsGrid = GridPosition.getSroi(progress)
                 SecondActivity.stroi = progress
                 view.textStroi2.text = Util.STROI[progress]
-                harp2 = Harp(stroi = progress, position = harp1.position)
+                harp2 = Harp(tuning = progress, position = harp1.position)
                 viewModel.result.value = Util.getResult(harp1, harp2, viewModel.inPutText.value.toString())
             }
 
-            override fun onStartTrackingTouch(seekBar: SeekBar) {
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar) {
-            }
+            override fun onStartTrackingTouch(seekBar: SeekBar) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar) {}
         })
 
 

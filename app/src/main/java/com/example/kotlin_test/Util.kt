@@ -56,7 +56,6 @@ object Util {
         }
     }
 
-
     fun getResult(ourHarp: Harp, selectedHarp: Harp, tabs: String): String {
         if (ourHarp.allnote.isEmpty() || selectedHarp.allnote.isEmpty()) {
             return ""
@@ -68,7 +67,7 @@ object Util {
     private fun getInputTabs(inputtabs: String, harp: Harp): MutableList<String> {
         val str = inputtabs.split(" ").toMutableList()
         for (index in str.indices)
-            if (str[index] == "+3" && harp.stroi != PADDY) {
+            if (str[index] == "+3" && harp.tuning != PADDY) {
                 str[index] = "-2"
             }
         return str

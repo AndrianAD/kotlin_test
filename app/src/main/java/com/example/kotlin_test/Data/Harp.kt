@@ -9,7 +9,7 @@ import com.example.kotlin_test.Util.RIHTER
 import java.util.*
 
 
-class Harp(var stroi: Int = RIHTER, var position: Int = 5) {
+class Harp(var tuning: Int = RIHTER, var position: Int = 5) {
 
     var keyOfHarp: String = ""
     var allnote = arrayListOf<Pair<String, String>>()
@@ -17,7 +17,7 @@ class Harp(var stroi: Int = RIHTER, var position: Int = 5) {
     var tempRandom: String? = null
 
     init {
-        allnote = makeAllNotes(stroi, position)
+        allnote = makeAllNotes(tuning, position)
         keyOfHarp = allnote[0].first
     }
 
@@ -40,7 +40,7 @@ class Harp(var stroi: Int = RIHTER, var position: Int = 5) {
     fun makeharp(stroi: Int, position: Int, textView: TextView) {
         allnote = makeAllNotes(stroi, position)
         keyOfHarp = allnote.get(0).first
-        this.stroi = stroi
+        this.tuning = stroi
         this.position = position
         print(textView)
     }
@@ -60,7 +60,7 @@ class Harp(var stroi: Int = RIHTER, var position: Int = 5) {
             PADDY -> makePaddyNotes(tempList)
             COUNTRY -> makeCountryNotes(tempList)
             MINOR -> makeMinorNotes(tempList)
-            else -> throw IllegalArgumentException("Wrong stroi $stroi")
+            else -> throw IllegalArgumentException("Wrong tuning $stroi")
         }
     }
 

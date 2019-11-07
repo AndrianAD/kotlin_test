@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.example.kotlin_test.Data.Harp
+import com.example.kotlin_test.Fragments.ScaleFragment.Companion.makeScales
 import com.example.kotlin_test.Util.RIHTER
 import kotlinx.android.synthetic.main.activity_second.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -36,6 +37,7 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
 
+
         //Close keyboard on click
         Util.setupUI(window.decorView.rootView, this)
         // ViewModel
@@ -58,17 +60,9 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
             set3Hole(tabsOrNotes, harp1)
         })
 
+        viewModel.result.observe(this, androidx.lifecycle.Observer { outputResult.text = it })
 
-        viewModel.result.observe(this, androidx.lifecycle.Observer {
-            outputResult.text = it
-
-        })
-
-
-
-        viewModel.inPutText.observe(this, androidx.lifecycle.Observer {
-            inputResult.setText(it)
-        })
+        viewModel.inPutText.observe(this, androidx.lifecycle.Observer { inputResult.setText(it) })
 
 
         setting_id.setOnClickListener {
@@ -86,6 +80,7 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
         seekBarKey.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, b: Boolean) {
+                makeScales.value = true
                 if (tabsOrNotes) {
                     harp1 = Harp(position = progress)
                     textKey.text = harp1.keyOfHarp
@@ -98,14 +93,9 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
                 }
             }
 
-            override fun onStartTrackingTouch(seekBar: SeekBar) {
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar) {
-            }
+            override fun onStartTrackingTouch(seekBar: SeekBar) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar) {}
         })
-
-
 
         seekBarStroi.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
@@ -114,17 +104,13 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
                 positionsGrid = GridPosition.getSroi(progress)
                 stroi = progress
                 textStroi.text = Util.STROI[progress]
-                harp1 = Harp(stroi = progress, position = harp1.position)
+                harp1 = Harp(tuning = progress, position = harp1.position)
                 showHarmonica.value = true
                 viewModel.result.value = Util.getResult(harp1, harp2, viewModel.inPutText.value.toString())
-
             }
 
-            override fun onStartTrackingTouch(seekBar: SeekBar) {
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar) {
-            }
+            override fun onStartTrackingTouch(seekBar: SeekBar) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar) {}
         })
 
 
@@ -134,10 +120,7 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
         val hole = findViewById<TextView>(R.id.b12)
         if (tabsOrNotes) {
             hole.text = harp.allnote[7].first
-
-        } else {
-            hole.text = "+3"
-        }
+        } else hole.text = "+3"
     }
 
     fun showHarmonica(positionsGrid: IntArray, harp: Harp, tabsOrNotes: Boolean) {
@@ -155,7 +138,6 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
             listOfActiveGrid.add(hole)
         }
 
-
         val hole3 = findViewById<TextView>(R.id.b12)
         hole3.setOnClickListener {
             viewModel.inPutText.value += " " + "+3"
@@ -169,19 +151,14 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
     }
 
 
-    override fun afterTextChanged(s: Editable?) {
-
-    }
-
-    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-    }
+    override fun afterTextChanged(s: Editable?) {}
+    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
         viewModel.result.value = Util.getResult(harp1, harp2, s.toString())
     }
 
-    override fun onBackPressed() {
-    }
+    override fun onBackPressed() {}
 
 }
 

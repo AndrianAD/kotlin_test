@@ -10,9 +10,5 @@ class SettingHarmonica : AppCompatActivity() {
         setContentView(R.layout.activity_setting_harmonica)
 
 
-
-
-
-
     }
 }
