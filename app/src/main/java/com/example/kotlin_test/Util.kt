@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.GridLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -98,6 +99,10 @@ object Util {
         for (i in SecondActivity.positionsGrid.indices) {
             hole = activity.findViewById(SecondActivity.positionsGrid[i])
             hole.text = ""
+
+
+
+
             val defaultColor = activity.resources.getColor(R.color.Default)
 
             if (hole.currentTextColor != defaultColor) {
@@ -106,6 +111,16 @@ object Util {
 
         }
     }
+
+
+     fun clearView2(layout: GridLayout) {
+        val childCount = layout.childCount
+        for (i in 0 until childCount) {
+            val textView = layout.getChildAt(i) as TextView
+            textView.text = ""
+        }
+    }
+
 
     private fun changetabs(ourHarp: Harp, selectedHarp: Harp, usersTabs: MutableList<String>): String {
         var rezultat = ""

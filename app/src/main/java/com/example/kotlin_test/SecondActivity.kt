@@ -76,6 +76,7 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
 
 
         setting_id.setOnClickListener {
+            Util.clearView2(grid_layout)
             tabsOrNotes = !tabsOrNotes
             showHarmonica(positionsGrid, harp1, tabsOrNotes)
             set3Hole(tabsOrNotes, harp1)
