@@ -50,6 +50,9 @@ dependencies {
     // Koin AndroidX Experimental features
     implementation "org.koin:koin-androidx-ext:2.0.1"
 
+    implementation 'com.github.AndrianAD:FirstModule:0.3'
+
+
 
 
 }

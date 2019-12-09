@@ -60,17 +60,17 @@ object Util {
         if (ourHarp.allnote.isEmpty() || selectedHarp.allnote.isEmpty()) {
             return ""
         }
-        val usersTabs = getInputTabs(tabs, ourHarp)
+        val usersTabs = getInputTabs(tabs.replace("\n"," \n "), ourHarp)
         return changetabs(ourHarp, selectedHarp, usersTabs)
     }
 
     private fun getInputTabs(inputtabs: String, harp: Harp): MutableList<String> {
-        val str = inputtabs.split(" ").toMutableList()
-        for (index in str.indices)
-            if (str[index] == "+3" && harp.tuning != PADDY) {
-                str[index] = "-2"
+        val splited = inputtabs.split(" ").toMutableList()
+        for (index in splited.indices)
+            if (splited[index] == "+3" && harp.tuning != PADDY) {
+                splited[index] = "-2"
             }
-        return str
+        return splited
     }
 
 

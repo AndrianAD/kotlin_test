@@ -42,7 +42,7 @@ class SettingFragment : Fragment() {
 
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, b: Boolean) {
                 SecondActivity.positionsGrid = GridPosition.getSroi(progress)
-                SecondActivity.stroi = progress
+                SecondActivity.tune = progress
                 view.textStroi2.text = Util.STROI[progress]
                 harp2 = Harp(tuning = progress, position = harp1.position)
                 viewModel.result.value = Util.getResult(harp1, harp2, viewModel.inPutText.value.toString())

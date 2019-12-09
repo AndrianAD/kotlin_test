@@ -3,6 +3,8 @@ package com.example.kotlin_test
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
+import android.widget.EditText
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +19,7 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 
 class SecondActivity : AppCompatActivity(), TextWatcher {
+
     companion object {
         lateinit var harp1: Harp
         lateinit var harp2: Harp
@@ -24,7 +27,7 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
         var tabsOrNotes: Boolean = true
         lateinit var viewModel: ViewModel
         lateinit var positionsGrid: IntArray
-        var stroi = RIHTER
+        var tune = RIHTER
     }
 
     init {
@@ -36,6 +39,14 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
+
+
+//        val newValue = "NEW VALUE"
+//        val oldText = "текст песни sdsfdf  dfg  @A#@ ff  sdgdf  gdfdgfh    @Bb@ gf  df   @A@  A Ab A @A " //    @TAG@
+//        val regex = "@(\\S+)@".toRegex()
+//        val newText = regex.replace(oldText) { oldValue -> newValue } // тут меняем ноту на нужную
+//        Log.d("xxx", oldText)
+//        Log.d("xxx", newText)
 
 
         //Close keyboard on click
@@ -61,7 +72,6 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
         })
 
         viewModel.result.observe(this, androidx.lifecycle.Observer { outputResult.text = it })
-
         viewModel.inPutText.observe(this, androidx.lifecycle.Observer { inputResult.setText(it) })
 
 
@@ -80,7 +90,7 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
         seekBarKey.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, b: Boolean) {
-                makeScales.value = true
+
                 if (tabsOrNotes) {
                     harp1 = Harp(position = progress)
                     textKey.text = harp1.keyOfHarp
@@ -91,6 +101,7 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
                     textKey.text = harp1.keyOfHarp
                     viewModel.result.value = Util.getResult(harp1, harp2, viewModel.inPutText.value.toString())
                 }
+                makeScales.value = true
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {}
@@ -102,7 +113,7 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, b: Boolean) {
                 Util.clearView(this@SecondActivity)
                 positionsGrid = GridPosition.getSroi(progress)
-                stroi = progress
+                tune = progress
                 textStroi.text = Util.STROI[progress]
                 harp1 = Harp(tuning = progress, position = harp1.position)
                 showHarmonica.value = true
@@ -145,7 +156,8 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
 
         for ((index, element) in listOfActiveGrid.withIndex()) {
             element.setOnClickListener {
-                viewModel.inPutText.value += " " + harp.allnote[index].second
+                viewModel.inPutText.value =inputResult.text.toString()+ " " + harp.allnote[index].second
+                inputResult.setSelection(inputResult.text.length)
             }
         }
     }
