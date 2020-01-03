@@ -61,17 +61,65 @@ object Util {
         if (ourHarp.allnote.isEmpty() || selectedHarp.allnote.isEmpty()) {
             return ""
         }
-        val usersTabs = getInputTabs(tabs.replace("\n"," \n "), ourHarp)
-        return changetabs(ourHarp, selectedHarp, usersTabs)
+        // Todo delete later
+        //val usersTabs = getInputTabs(tabs.replace("\n", " \n "), ourHarp)
+        return changeTabs(ourHarp, selectedHarp, tabs)
     }
 
-    private fun getInputTabs(inputtabs: String, harp: Harp): MutableList<String> {
-        val splited = inputtabs.split(" ").toMutableList()
-        for (index in splited.indices)
-            if (splited[index] == "+3" && harp.tuning != PADDY) {
-                splited[index] = "-2"
+
+
+    // Todo delete later
+//    private fun getInputTabs(inputtabs: String, harp: Harp): MutableList<String> {
+//        val splited = inputtabs.split(" ").toMutableList()
+//        for (index in splited.indices)
+//            if (splited[index] == "+3" && harp.tuning != PADDY) {
+//                splited[index] = "-2"
+//            }
+//        return splited
+//    }
+
+
+//    private fun changetabs(ourHarp: Harp, selectedHarp: Harp, usersTabs: MutableList<String>): String {
+//        var rezult = ""
+//        val temp = checkDifferencePosition(ourHarp.position, selectedHarp.position)
+//        for (indexI in usersTabs.indices) {
+//            if (usersTabs[indexI].contains("\n"))
+//                rezult += "\n"
+//            for (indexJ in ourHarp.allnote.indices) {
+//                if (usersTabs[indexI] == ourHarp.allnote[indexJ].second) {
+//                    val newIndexJ = checkMargin(indexJ, temp)
+//                    rezult += " " + selectedHarp.allnote[newIndexJ].second
+//                    break
+//                }
+//            }
+//        }
+//        return rezult
+//    }
+
+
+    private fun changeTabs(ourHarp: Harp, selectedHarp: Harp, text: String): String {
+        val regex = "<(\\S+)>".toRegex()
+        return regex.replace(text) { oldValue -> setNewValue(oldValue.value.dropLast(1).drop(1), ourHarp, selectedHarp) } // тут меняем ноту на нужную
+    }
+
+    private fun setNewValue(oldValue: String, ourHarp: Harp, selectedHarp: Harp): String {
+        var result = ""
+        var value=oldValue
+        val temp = checkDifferencePosition(ourHarp.position, selectedHarp.position)
+        if (oldValue.contains("\n"))
+            result += "\n"
+
+        if (oldValue.contains("+3") && ourHarp.tuning != PADDY) {
+            value = "-2"
+        }
+        for (indexJ in ourHarp.allnote.indices) {
+            if (value == ourHarp.allnote[indexJ].second) {
+                val newIndexJ = checkMargin(indexJ, temp)
+                result += " " + selectedHarp.allnote[newIndexJ].second
+                break
             }
-        return splited
+        }
+        return result
     }
 
 
@@ -99,12 +147,7 @@ object Util {
         for (i in SecondActivity.positionsGrid.indices) {
             hole = activity.findViewById(SecondActivity.positionsGrid[i])
             hole.text = ""
-
-
-
-
             val defaultColor = activity.resources.getColor(R.color.Default)
-
             if (hole.currentTextColor != defaultColor) {
                 hole.setTextColor(defaultColor)
             }
@@ -113,7 +156,7 @@ object Util {
     }
 
 
-     fun clearView2(layout: GridLayout) {
+    fun clearView2(layout: GridLayout) {
         val childCount = layout.childCount
         for (i in 0 until childCount) {
             val textView = layout.getChildAt(i) as TextView
@@ -121,23 +164,6 @@ object Util {
         }
     }
 
-
-    private fun changetabs(ourHarp: Harp, selectedHarp: Harp, usersTabs: MutableList<String>): String {
-        var rezultat = ""
-        val temp = checkDifferencePosition(ourHarp.position, selectedHarp.position)
-        for (indexI in usersTabs.indices) {
-            if (usersTabs[indexI].contains("\n"))
-                rezultat += "\n"
-            for (indexJ in ourHarp.allnote.indices) {
-                if (usersTabs[indexI] == ourHarp.allnote[indexJ].second) {
-                    val newIndexJ = checkMargin(indexJ, temp)
-                    rezultat += " " + selectedHarp.allnote[newIndexJ].second
-                    break
-                }
-            }
-        }
-        return rezultat
-    }
 
     private fun checkMargin(indexJ: Int, temp: Int): Int {
         var sum = indexJ + temp

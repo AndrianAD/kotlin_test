@@ -3,8 +3,6 @@ package com.example.kotlin_test
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.View
-import android.widget.EditText
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -43,7 +41,7 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
 
 //        val newValue = "NEW VALUE"
 //        val oldText = "текст песни sdsfdf  dfg  @A#@ ff  sdgdf  gdfdgfh    @Bb@ gf  df   @A@  A Ab A @A " //    @TAG@
-//        val regex = "@(\\S+)@".toRegex()
+//        val regex = "<(\\S+)>".toRegex()
 //        val newText = regex.replace(oldText) { oldValue -> newValue } // тут меняем ноту на нужную
 //        Log.d("xxx", oldText)
 //        Log.d("xxx", newText)
@@ -95,12 +93,12 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
                 if (tabsOrNotes) {
                     harp1 = Harp(position = progress)
                     textKey.text = harp1.keyOfHarp
-                    SecondActivity.showHarmonica.value = true
-                    viewModel.result.value = Util.getResult(harp1, harp2, viewModel.inPutText.value.toString())
+                    showHarmonica.value = true
+                    viewModel.result.value = Util.getResult(harp1, harp2, inputResult.text.toString())
                 } else {
                     harp1 = Harp(position = progress)
                     textKey.text = harp1.keyOfHarp
-                    viewModel.result.value = Util.getResult(harp1, harp2, viewModel.inPutText.value.toString())
+                    viewModel.result.value = Util.getResult(harp1, harp2, inputResult.text.toString())
                 }
                 makeScales.value = true
             }
@@ -118,7 +116,7 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
                 textStroi.text = Util.STROI[progress]
                 harp1 = Harp(tuning = progress, position = harp1.position)
                 showHarmonica.value = true
-                viewModel.result.value = Util.getResult(harp1, harp2, viewModel.inPutText.value.toString())
+                viewModel.result.value = Util.getResult(harp1, harp2, inputResult.text.toString())
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {}
@@ -135,7 +133,7 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
         } else hole.text = "+3"
     }
 
-    fun showHarmonica(positionsGrid: IntArray, harp: Harp, tabsOrNotes: Boolean) {
+    private fun showHarmonica(positionsGrid: IntArray, harp: Harp, tabsOrNotes: Boolean) {
 
         val arrayOfNotes = harp.splitAllNotesToList(harp.allnote, tabsOrNotes)
         //  val array_of_allTabs =all_Tabs.split(" ").toMutableList()
@@ -145,19 +143,19 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
         for (i in positionsGrid.indices) {
             hole = findViewById(positionsGrid[i])
             hole.text = arrayOfNotes[i]
-            hole.isClickable = true
+            //hole.isClickable = true
             hole.makeSelectable()
             listOfActiveGrid.add(hole)
         }
 
         val hole3 = findViewById<TextView>(R.id.b12)
         hole3.setOnClickListener {
-            viewModel.inPutText.value += " " + "+3"
+            viewModel.inPutText.value += " " + "<+3>"
         }
 
         for ((index, element) in listOfActiveGrid.withIndex()) {
             element.setOnClickListener {
-                viewModel.inPutText.value =inputResult.text.toString()+ " " + harp.allnote[index].second
+                viewModel.inPutText.value = inputResult.text.toString() + " " + "<" + harp.allnote[index].second + ">"
                 inputResult.setSelection(inputResult.text.length)
             }
         }
@@ -168,6 +166,7 @@ class SecondActivity : AppCompatActivity(), TextWatcher {
     override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        // Main Calculation!!!
         viewModel.result.value = Util.getResult(harp1, harp2, s.toString())
     }
 
